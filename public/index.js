@@ -150,26 +150,18 @@ Tree.prototype.getPerson = function (personName) {
     return this.data[personName];
 }
 
-Tree.prototype.getDomTree = function (name) {
+Tree.prototype.getDomTree = function (name, rootId, level = 0) {
     const person = this.getPerson(name);
     if (person.spouse) {
         const p1 = document.createElement('div');
-        const className = 'parent' + this.level;
-        // p1.setAttribute('class', className);
+        const className = 'child' + rootId + level;
         setAttributes(p1, { 'class': className, id: className })
         p1.appendChild(getSpanList(person.name, person.spouse));
-        document.getElementById(this.rootId).appendChild(p1);
-
-        // const p2 = document.createElement('div');
-        // p2.innerHTML = person.spouse;
-        // p2.setAttribute('class', className);
-        // treeStructure.appendChild(p2);
+        document.getElementById(rootId).appendChild(p1);
 
         if (person.children && person.children.length) {
-            this.rootId = className;
-            this.level++;
             person.children.forEach((t, i) => {
-                this.getDomTree(t);
+                this.getDomTree(t, className, i + 1);
             })
         } else {
             //TODO:he/she is waiting hehe
@@ -177,9 +169,10 @@ Tree.prototype.getDomTree = function (name) {
         }
     } else {
         const child = document.createElement('div');
-        child.setAttribute('class', 'child');
+        const className = 'child' + rootId + level;
+        setAttributes(child, { 'class': className, id: className })
         child.innerHTML = person.name;
-        document.getElementById(this.rootId).appendChild(child);
+        document.getElementById(rootId).appendChild(child);
     }
 }
 
@@ -193,7 +186,7 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 const newJson = new Tree();
 newJson.getJson(sample);
-newJson.getDomTree("soundarapandian");
+newJson.getDomTree("iyyamperumal", 'tree-structure');
 
 
 
