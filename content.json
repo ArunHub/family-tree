@@ -1,0 +1,47 @@
+{
+  "iyyamperumal":{
+    "isParent": true,
+    "gender": "M",
+    "_age": 68,
+    "spouse": "thangammal",
+    "children": ["soundarapandian","mani", "selvakumar"]
+  },
+  "thangammal":{},
+  "soundarapandian":{
+    "isParent": true,
+    "gender": "M",
+    "_age": 58,
+    "spouse": "thulasirani",
+    "children": [   "sudarshan",  "abinaya"],
+    "siblings": ["mani", "selvakumar"]
+  },
+  "thulasirani":{
+    "_age": 50,
+    "gender": "F",
+    "isParent": true,
+    "spouse": "soundarapandian",
+    "children": ["sudarshan", "abi"]
+  },
+  "sudarshan": {
+    "gender": "M",
+    "_age": 31,
+    "isParent": false,
+    "siblings": ["abi"]
+  },
+  "abinaya":{
+    "gender":"F",
+    "_age":28,
+    "isParent": true,
+    "spouse":"vijayaprabhu",
+    "children":["sanvika"],
+    "siblings":["sudarshan"]
+  },
+  "vijayaprabhu":{
+    "gender": "M",
+    "isParent":true,
+    "spouse": "abinaya",
+    "_age":31,
+    "children":["sanvika"],
+    "siblings":[]
+  }
+}
