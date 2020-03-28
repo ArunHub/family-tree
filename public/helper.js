@@ -40,10 +40,20 @@ function getSpanList() {
   const fragment = new DocumentFragment();
 
   Object.values(arguments).forEach(function (name) {
-    var span = document.createElement('span')
+    var span = document.createElement('span');
+    span.setAttribute('class', 'parentNode')
     span.innerHTML = name
     fragment.appendChild(span)
   })
 
   return fragment;
+}
+
+function getPathList(rootId, w, h, cL, strWidth) {
+  const id = document.getElementById(rootId);
+  const width = w / (cL - 1);
+  for (let index = 0; index < cL; index++) {
+    const path = `<path d="M ${width * index} 0 V ${h}" stroke="orange" stroke-width="${strWidth}" />`;
+    id.innerHTML += path;
+  }
 }

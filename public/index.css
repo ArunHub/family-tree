@@ -1,0 +1,21 @@
+.tree-structure{
+  text-align: center;
+}
+
+span {
+  display: inline-block;
+}
+
+.parentNode ~ div{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.parentNode + .parentNode{
+  margin-left: 10px;
+}
+
+svg{
+  display: block;
+  margin: 0 auto;
+}

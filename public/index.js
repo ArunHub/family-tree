@@ -154,14 +154,39 @@ Tree.prototype.getDomTree = function (name, rootId, level = 0) {
     const person = this.getPerson(name);
     if (person.spouse) {
         const p1 = document.createElement('div');
-        const className = 'child' + rootId + level;
-        setAttributes(p1, { 'class': className, id: className })
-        p1.appendChild(getSpanList(person.name, person.spouse));
-        document.getElementById(rootId).appendChild(p1);
+        const id = name + '-tree-' + level;
+        setAttributes(p1, { id });
+        const spanList = getSpanList(person.name, person.spouse)
+        p1.appendChild(spanList);
+        const parentId = document.getElementById(rootId);
+        parentId.appendChild(p1);
 
         if (person.children && person.children.length) {
+            const cL = person.children.length;
+            const currentParentID = document.getElementById(id);
+            const pWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
+            const mL = 10;
+            const totalW = pWidth + mL;
+            const parts = (totalW) / 4;
+            const midPt = (totalW) / 2;
+            const strWidth = 2
+            console.log('totalW', cL);
+
+            const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW} ${midPt}" width="${totalW}" height="${midPt}"
+      preserveAspectRatio="xMidYMid meet">
+      <path d="M ${parts} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/> 
+      <path d="M ${parts * 3} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/>`;
+
+            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1"        viewBox="0 0 ${totalW * cL} ${midPt}" width="${totalW * cL}" height="${midPt}"
+      preserveAspectRatio="xMidYMid meet">
+      ${cL > 1 ? `<path d="M 0 ${strWidth} H ${totalW * cL}" stroke="green" stroke-width="${strWidth}" /> ` : `<path d="M ${midPt} ${strWidth} V ${midPt}" stroke="green" stroke-width="${strWidth}" />`}
+      `;
+
+            currentParentID.innerHTML += svgElOne;
+            currentParentID.innerHTML += svgElTwo;
+            (cL > 1) && getPathList(`svg2-${id}`, totalW * cL, midPt, cL, strWidth);
             person.children.forEach((t, i) => {
-                this.getDomTree(t, className, i + 1);
+                this.getDomTree(t, id, i + 1);
             })
         } else {
             //TODO:he/she is waiting hehe
@@ -169,9 +194,9 @@ Tree.prototype.getDomTree = function (name, rootId, level = 0) {
         }
     } else {
         const child = document.createElement('div');
-        const className = 'child' + rootId + level;
-        setAttributes(child, { 'class': className, id: className })
-        child.innerHTML = person.name;
+        const id = name + '-tree-' + level;
+        setAttributes(child, { id })
+        child.innerHTML = name;
         document.getElementById(rootId).appendChild(child);
     }
 }
