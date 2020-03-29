@@ -121,20 +121,20 @@ function Person(obj) {
     this.spouse = obj.spouse || "";
     this.children = obj.children || [];
     this.siblings = obj.siblings;
-    this.marital_status = obj.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE;
+    this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE;
     this.profession = obj.profession //private
     this.lifeSpan = obj.lifeSpan;
+    this.childCount = this.children.length;//todo furthe
     // this.anniversary = getAnniversary(obj.anniversary);
+    this.svgId = "";
 }
 
 function Tree() {
     this.data = {};
-    this.level = 0;
-    this.rootId = "tree-structure";
 }
 
-function Search(person) {
-    this.person = person;
+function Search() {
+    this.treeWeight = 1;
 }
 
 Tree.prototype.getJson = function (array) {
@@ -146,12 +146,29 @@ Tree.prototype.getJson = function (array) {
     this.data = data;
 }
 
-Tree.prototype.getPerson = function (personName) {
-    return this.data[personName];
+function getPerson(personName) {
+    return newJson.data[personName];
 }
 
-Tree.prototype.getDomTree = function (name, rootId, level = 0) {
-    const person = this.getPerson(name);
+function getChildCount(name, count = 1) {
+    const person = getPerson(name);
+    let num = count;
+    if (person.spouse) {
+        num++;
+        if (person.childCount) {
+            num = num + person.childCount;
+            person.children.forEach((t) => num = getChildCount(t, num));
+        }
+    }
+    return num;
+}
+
+Tree.prototype.setTreeId = function (name, id) {
+    this.data[name].svgId = id;
+}
+
+function getDomTree(name, rootId, level = 0) {
+    const person = getPerson(name);
     if (person.spouse) {
         const p1 = document.createElement('div');
         const id = name + '-tree-' + level;
@@ -161,32 +178,37 @@ Tree.prototype.getDomTree = function (name, rootId, level = 0) {
         const parentId = document.getElementById(rootId);
         parentId.appendChild(p1);
 
-        if (person.children && person.children.length) {
-            const cL = person.children.length;
+        if (person.childCount) {
+
+            const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
+            console.log('eeeeeeeee', childCount);
+
+            const treeW = childCount/2;
+            const cL = person.childCount;
             const currentParentID = document.getElementById(id);
             const pWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
-            const mL = 10;
+            const mL = 10; //margin-left
             const totalW = pWidth + mL;
             const parts = (totalW) / 4;
             const midPt = (totalW) / 2;
             const strWidth = 2
-            console.log('totalW', cL);
+            // console.log('totalW', treeW);
 
             const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW} ${midPt}" width="${totalW}" height="${midPt}"
       preserveAspectRatio="xMidYMid meet">
       <path d="M ${parts} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/> 
       <path d="M ${parts * 3} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/>`;
 
-            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1"        viewBox="0 0 ${totalW * cL} ${midPt}" width="${totalW * cL}" height="${midPt}"
+            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW * treeW} ${midPt}" width="${totalW * treeW}" height="${midPt}"
       preserveAspectRatio="xMidYMid meet">
-      ${cL > 1 ? `<path d="M 0 ${strWidth} H ${totalW * cL}" stroke="green" stroke-width="${strWidth}" /> ` : `<path d="M ${midPt} ${strWidth} V ${midPt}" stroke="green" stroke-width="${strWidth}" />`}
+      ${cL > 1 ? `<path d="M 0 ${strWidth} H ${totalW * treeW}" stroke="green" stroke-width="${strWidth}" /> ` : `<path d="M ${midPt} ${strWidth} V ${midPt}" stroke="green" stroke-width="${strWidth}" />`}
       `;
-
+            // newJson.setTreeId(name, `svg2-${id}`);
             currentParentID.innerHTML += svgElOne;
             currentParentID.innerHTML += svgElTwo;
-            (cL > 1) && getPathList(`svg2-${id}`, totalW * cL, midPt, cL, strWidth);
+            (cL > 1) && getPathList(`svg2-${id}`, totalW * treeW, midPt, cL, strWidth);
             person.children.forEach((t, i) => {
-                this.getDomTree(t, id, i + 1);
+                getDomTree(t, id, i + 1);
             })
         } else {
             //TODO:he/she is waiting hehe
@@ -211,7 +233,8 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 const newJson = new Tree();
 newJson.getJson(sample);
-newJson.getDomTree("iyyamperumal", 'tree-structure');
+const search = new Search();
+getDomTree("iyyamperumal", 'tree-structure');
 
 
 
