@@ -126,28 +126,28 @@ function Person(obj) {
     this.lifeSpan = obj.lifeSpan;
     this.childCount = this.children.length;//todo furthe
     // this.anniversary = getAnniversary(obj.anniversary);
-    this.svgId = "";
+    this.pathId = "";
 }
 
-function Tree() {
-    this.data = {};
+function Tree(array) {
+    this.data = getJson(array);
 }
 
-function Search() {
-    this.treeWeight = 1;
-}
-
-Tree.prototype.getJson = function (array) {
+function getJson(array) {
     let data = {};
     array.forEach(t => {
-        data = Object.assign(this.data, { [t.name]: new Person(t) })
+        data = Object.assign(data, { [t.name]: new Person(t) })
     })
 
-    this.data = data;
+    return data;
 }
 
 function getPerson(personName) {
     return newJson.data[personName];
+}
+
+function setPathId(name, id) {
+    newJson.data[name].pathId = id;
 }
 
 function getChildCount(name, count = 1) {
@@ -163,15 +163,17 @@ function getChildCount(name, count = 1) {
     return num;
 }
 
-Tree.prototype.setTreeId = function (name, id) {
-    this.data[name].svgId = id;
-}
-
 function getDomTree(name, rootId, level = 0) {
     const person = getPerson(name);
     if (person.spouse) {
         const p1 = document.createElement('div');
         const id = name + '-tree-' + level;
+        if (level > 0) {
+            const pathElem = document.getElementById(person.pathId);
+            const position = pathElem.getClientRects();
+            const { left, top, height } = position[0];
+            setAttributes(p1, { id, left, top, height });
+        }
         setAttributes(p1, { id });
         const spanList = getSpanList(person.name, person.spouse)
         p1.appendChild(spanList);
@@ -181,9 +183,8 @@ function getDomTree(name, rootId, level = 0) {
         if (person.childCount) {
 
             const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
-            console.log('eeeeeeeee', childCount);
 
-            const treeW = childCount/2;
+            const treeW = childCount / 2;
             const cL = person.childCount;
             const currentParentID = document.getElementById(id);
             const pWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
@@ -192,7 +193,6 @@ function getDomTree(name, rootId, level = 0) {
             const parts = (totalW) / 4;
             const midPt = (totalW) / 2;
             const strWidth = 2
-            // console.log('totalW', treeW);
 
             const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW} ${midPt}" width="${totalW}" height="${midPt}"
       preserveAspectRatio="xMidYMid meet">
@@ -203,11 +203,14 @@ function getDomTree(name, rootId, level = 0) {
       preserveAspectRatio="xMidYMid meet">
       ${cL > 1 ? `<path d="M 0 ${strWidth} H ${totalW * treeW}" stroke="green" stroke-width="${strWidth}" /> ` : `<path d="M ${midPt} ${strWidth} V ${midPt}" stroke="green" stroke-width="${strWidth}" />`}
       `;
-            // newJson.setTreeId(name, `svg2-${id}`);
             currentParentID.innerHTML += svgElOne;
             currentParentID.innerHTML += svgElTwo;
-            (cL > 1) && getPathList(`svg2-${id}`, totalW * treeW, midPt, cL, strWidth);
+            if (cL > 1) {
+                const pathOffset = getPathList(`svg2-${id}`, totalW * treeW, midPt, cL, strWidth);
+                console.log('path', pathOffset);
+            }
             person.children.forEach((t, i) => {
+                setPathId(t, `path-svg2-${id}-${i}`);
                 getDomTree(t, id, i + 1);
             })
         } else {
@@ -231,9 +234,7 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 
 
-const newJson = new Tree();
-newJson.getJson(sample);
-const search = new Search();
+const newJson = new Tree(sample);
 getDomTree("iyyamperumal", 'tree-structure');
 
 
@@ -242,7 +243,7 @@ getDomTree("iyyamperumal", 'tree-structure');
 function handleSearch(e) {
     e.preventDefault();
     const rootName = document.getElementById('root-name');
-    const person = newJson.getPerson(rootName.value);
+    const person = getPerson(rootName.value);
     console.log('va', person)
 
 }

@@ -52,8 +52,11 @@ function getSpanList() {
 function getPathList(rootId, w, h, cL, strWidth) {
   const id = document.getElementById(rootId);
   const width = w / (cL - 1);
+  // let tempArr = [];
   for (let index = 0; index < cL; index++) {
-    const path = `<path d="M ${width * index} 0 V ${h}" stroke="orange" stroke-width="${strWidth}" />`;
+    // tempArr.push(width * index);
+    const path = `<path id="path-${rootId}-${index}" d="M ${width * index} 0 V ${h}" stroke="orange" stroke-width="${strWidth}" />`;
     id.innerHTML += path;
   }
+  // return tempArr;
 }
