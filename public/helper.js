@@ -28,12 +28,13 @@ function setAttributes(el, attrs) {
   Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
 }
 
-function getTextElem(value, rootTag, attrs) {
-  const textElement = document.createElementNS(svgNamespace, 'text');
+function createText(value, rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const textElement = document.createElementNS(xmlns, 'text');
   const nodevalue = document.createTextNode(value);
   textElement.appendChild(nodevalue);
   setAttributesNs(textElement, attrs);
-  rootTag.appendChild(textElement);
+  id.appendChild(textElement);
 }
 
 function getSpanList() {
@@ -59,4 +60,18 @@ function getPathList(rootId, w, h, cL, strWidth) {
     id.innerHTML += path;
   }
   // return tempArr;
+}
+
+function createPath(rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const element = document.createElementNS(xmlns, 'path');
+  setAttributesNs(element, attrs);
+  id.appendChild(element);
+}
+
+function createSvg(rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const element = `<svg id="${attrs.id}" xmlns="${xmlns}" version="${version}" viewBox="${attrs.viewBox}" width="${attrs.width}" height="${attrs.height}"
+      preserveAspectRatio="${preserveAspectRatio}" />`;
+  id.innerHTML += element;
 }

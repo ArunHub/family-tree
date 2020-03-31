@@ -1,3 +1,8 @@
+body{
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .tree-structure{
   text-align: center;
 }
@@ -15,7 +20,7 @@ span {
   margin-left: 10px;
 }
 
-svg{
+.tree-structure > div svg:first-of-type{
   display: block;
   margin: 0 auto;
 }

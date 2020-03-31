@@ -16,4 +16,12 @@ const MARITAL_STATUS = {
   WIDOW: "WIDOW"
 }
 
-const svgNamespace = "http://www.w3.org/2000/svg";
+const strWidth = 2;
+const mL = 10; //margin-left
+
+const xmlns = "http://www.w3.org/2000/svg"; 
+const preserveAspectRatio = "xMidYMid meet";
+const version = "1.1";
+
+const strOrange = "orange";
+const strGreen = "green";

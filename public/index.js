@@ -47,7 +47,7 @@ const sample = [
         "gender": "M",
         "_age": 48,
         "spouse": "pushparani",
-        "children": ["rashika", "shamdeepak"],
+        "children": ["rashika"],
         "siblings": ["soundarapandian", "mani"]
     },
     {
@@ -168,12 +168,12 @@ function getDomTree(name, rootId, level = 0) {
     if (person.spouse) {
         const p1 = document.createElement('div');
         const id = name + '-tree-' + level;
-        if (level > 0) {
-            const pathElem = document.getElementById(person.pathId);
-            const position = pathElem.getClientRects();
-            const { left, top, height } = position[0];
-            setAttributes(p1, { id, left, top, height });
-        }
+        // if (level > 0) {
+        //     const pathElem = document.getElementById(person.pathId);
+        //     const position = pathElem.getClientRects();
+        //     const { left, top, height } = position[0];
+        //     setAttributes(p1, { id, left, top, height });
+        // }
         setAttributes(p1, { id });
         const spanList = getSpanList(person.name, person.spouse)
         p1.appendChild(spanList);
@@ -184,34 +184,45 @@ function getDomTree(name, rootId, level = 0) {
 
             const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
 
-            const treeW = childCount / 2;
+            const treeWeight = childCount / 2;
             const cL = person.childCount;
             const currentParentID = document.getElementById(id);
-            const pWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
-            const mL = 10; //margin-left
-            const totalW = pWidth + mL;
-            const parts = (totalW) / 4;
-            const midPt = (totalW) / 2;
-            const strWidth = 2
+            const parentWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
+            const hTotalW = parentWidth + mL;
+            const quarter = (hTotalW) / 4;
+            const hMidPt = (hTotalW) / 2;
 
-            const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW} ${midPt}" width="${totalW}" height="${midPt}"
-      preserveAspectRatio="xMidYMid meet">
-      <path d="M ${parts} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/> 
-      <path d="M ${parts * 3} 0 L ${midPt} ${midPt}" stroke="orange" stroke-width="${strWidth}"/>`;
 
-            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${totalW * treeW} ${midPt}" width="${totalW * treeW}" height="${midPt}"
-      preserveAspectRatio="xMidYMid meet">
-      ${cL > 1 ? `<path d="M 0 ${strWidth} H ${totalW * treeW}" stroke="green" stroke-width="${strWidth}" /> ` : `<path d="M ${midPt} ${strWidth} V ${midPt}" stroke="green" stroke-width="${strWidth}" />`}
+            const hPathWidth = hTotalW * treeWeight;
+
+            const docWidth = document.defaultView.innerWidth;
+            const hStartPt = (docWidth - (hPathWidth)) / 2;
+
+            const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" viewBox="-8 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
+      preserveAspectRatio="${preserveAspectRatio}">
+      <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
+      <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>`;
+
+            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
+      preserveAspectRatio="${preserveAspectRatio}">
+      ${cL > 1 ? `<path d="M ${hStartPt} ${strWidth} H ${(hPathWidth) + hStartPt}" stroke="${strGreen}" stroke-width="${strWidth}" /> ` : `<path d="M ${hMidPt} ${strWidth} V ${hMidPt}" stroke="${strGreen}" stroke-width="${strWidth}" />`}
       `;
+            //first horizontal path or TODO: single child vertical path
             currentParentID.innerHTML += svgElOne;
             currentParentID.innerHTML += svgElTwo;
-            if (cL > 1) {
-                const pathOffset = getPathList(`svg2-${id}`, totalW * treeW, midPt, cL, strWidth);
-                console.log('path', pathOffset);
-            }
+
+            // if (cL > 1) {
+            //     const pathOffset = getPathList(`svg2-${id}`, hPathWidth, hMidPt, cL, strWidth);
+            //     console.log('path', pathOffset);
+            // }
+            // person.children.forEach((t, i) => {
+            //     setPathId(t, `path-svg2-${id}-${i}`);
+            //     getDomTree(t, id, i + 1);
+            // })
+
             person.children.forEach((t, i) => {
-                setPathId(t, `path-svg2-${id}-${i}`);
-                getDomTree(t, id, i + 1);
+                // setPathId(t, `path-svg2-${id}-${i}`);
+                drawSvg(t, i, `svg2-${id}`, { hPathWidth, vPathHeight: hMidPt, hMidPt, cL, hStartPt, vPathY: 0, step: 0 });
             })
         } else {
             //TODO:he/she is waiting hehe
@@ -223,6 +234,68 @@ function getDomTree(name, rootId, level = 0) {
         setAttributes(child, { id })
         child.innerHTML = name;
         document.getElementById(rootId).appendChild(child);
+    }
+}
+
+function drawSvg(name, index, svgId, extraParams) {
+    const person = getPerson(name);
+    const vPathPosition = extraParams.cL > 1 ? extraParams.hPathWidth / (extraParams.cL - 1) : extraParams.hMidPt;
+    const hStartPt = extraParams.cL > 1 ? (vPathPosition * index) + extraParams.hStartPt : vPathPosition + extraParams.hStartPt;
+
+    if (person.spouse) {
+        //first child vertical path
+        createPath(svgId, { d: `M ${hStartPt} ${(extraParams.vPathHeight + extraParams.hMidPt) * extraParams.step} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+        createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
+
+        const pathId1 = document.getElementById(`${name}-path`);
+        const p1Dimension = pathId1.getClientRects()[0];
+        createText(person.spouse, svgId, { id: person.spouse + "-path", x: (hStartPt) + p1Dimension.width, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
+
+        if (person.childCount) {
+            const pathId2 = document.getElementById(`${person.spouse}-path`);
+            const p2Width = pathId2.getClientRects()[0].width;
+            const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
+
+            const treeWeight = childCount / 2;
+            const cL = person.childCount;
+
+            const hTotalW = p1Dimension.width + p2Width;
+            const quarter = (hTotalW) / 4;
+            const hMidPt = (hTotalW) / 2;
+            const hPathWidth = hTotalW * treeWeight;
+
+            // createSvg(svgId, { id: `svg1-${name}`, viewBox: `${-quarter} ${-vPathHeight} ${hMidPt} ${hMidPt}`, width: hMidPt, height: hMidPt});
+            // createPath(`svg1-${name}`, { d: `M 0 0 L ${quarter} ${quarter}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` })
+            createPath(svgId, { d: `M ${(hStartPt) + quarter} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+
+            createPath(svgId, { d: `M ${(hStartPt) + quarter * 3} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+
+            cL > 1 && createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathHeight + hMidPt} H ${(hPathWidth) + hStartPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` })
+
+            // `${
+            //     cL > 1 ?
+
+            //         createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathHeight + hMidPt} H ${(hPathWidth) + hStartPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` })
+
+            //         :
+            //         // null
+            //     createPath(svgId, { d: `M ${hStartPt + hMidPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step))} L ${hMidPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` })
+            //     }`
+
+            person.children.forEach((t, i) => {
+                drawSvg(t, i, svgId, { hPathWidth, vPathHeight: extraParams.vPathHeight, cL, hStartPt, vPathY: extraParams.vPathHeight + hMidPt, hMidPt, step: extraParams.step + 1 })
+            })
+        }
+
+
+    } else {
+        if (extraParams.cL > 1) {
+            createPath(svgId, { d: `M ${hStartPt} ${(extraParams.vPathHeight + extraParams.hMidPt) * extraParams.step} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+        } else {//extraParams.vPathHeight * 3 + midpt
+            createPath(svgId, { d: `M ${hStartPt} ${extraParams.hMidPt + (extraParams.vPathHeight * extraParams.step) + extraParams.vPathHeight} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+        }
+
+        createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
     }
 }
 
