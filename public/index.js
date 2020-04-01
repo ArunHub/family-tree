@@ -47,7 +47,7 @@ const sample = [
         "gender": "M",
         "_age": 48,
         "spouse": "pushparani",
-        "children": ["rashika"],
+        "children": ["rashika",],
         "siblings": ["soundarapandian", "mani"]
     },
     {
@@ -124,9 +124,9 @@ function Person(obj) {
     this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE;
     this.profession = obj.profession //private
     this.lifeSpan = obj.lifeSpan;
-    this.childCount = this.children.length;//todo furthe
+    this.childCount = this.children.length;
     // this.anniversary = getAnniversary(obj.anniversary);
-    this.pathId = "";
+    // this.pathId = "";
 }
 
 function Tree(array) {
@@ -146,9 +146,9 @@ function getPerson(personName) {
     return newJson.data[personName];
 }
 
-function setPathId(name, id) {
-    newJson.data[name].pathId = id;
-}
+// function setPathId(name, id) {
+//     newJson.data[name].pathId = id;
+// }
 
 function getChildCount(name, count = 1) {
     const person = getPerson(name);
@@ -205,7 +205,7 @@ function getDomTree(name, rootId, level = 0) {
 
             const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
       preserveAspectRatio="${preserveAspectRatio}">
-      ${cL > 1 ? `<path d="M ${hStartPt} ${strWidth} H ${(hPathWidth) + hStartPt}" stroke="${strGreen}" stroke-width="${strWidth}" /> ` : `<path d="M ${hMidPt} ${strWidth} V ${hMidPt}" stroke="${strGreen}" stroke-width="${strWidth}" />`}
+      ${cL > 1 ? `<path d="M ${hStartPt} ${strWidth} H ${(hPathWidth) + hStartPt}" stroke="${strGreen}" stroke-width="${strWidth}" /> ` : ""}
       `;
             //first horizontal path or TODO: single child vertical path
             currentParentID.innerHTML += svgElOne;
@@ -245,10 +245,13 @@ function drawSvg(name, index, svgId, extraParams) {
     if (person.spouse) {
         //first child vertical path
         createPath(svgId, { d: `M ${hStartPt} ${(extraParams.vPathHeight + extraParams.hMidPt) * extraParams.step} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+
+        //parent one
         createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
 
         const pathId1 = document.getElementById(`${name}-path`);
         const p1Dimension = pathId1.getClientRects()[0];
+        //parent two
         createText(person.spouse, svgId, { id: person.spouse + "-path", x: (hStartPt) + p1Dimension.width, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
 
         if (person.childCount) {
@@ -266,11 +269,15 @@ function drawSvg(name, index, svgId, extraParams) {
 
             // createSvg(svgId, { id: `svg1-${name}`, viewBox: `${-quarter} ${-vPathHeight} ${hMidPt} ${hMidPt}`, width: hMidPt, height: hMidPt});
             // createPath(`svg1-${name}`, { d: `M 0 0 L ${quarter} ${quarter}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` })
+
+            //parent one slanting path
             createPath(svgId, { d: `M ${(hStartPt) + quarter} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
 
+            //parent two slanting path
             createPath(svgId, { d: `M ${(hStartPt) + quarter * 3} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
 
-            cL > 1 && createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathHeight + hMidPt} H ${(hPathWidth) + hStartPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` })
+            // horizontal path
+            cL > 1 && createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathHeight + hMidPt} H ${(hPathWidth) + hStartPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` }) //TODO: second level
 
             // `${
             //     cL > 1 ?
@@ -283,7 +290,7 @@ function drawSvg(name, index, svgId, extraParams) {
             //     }`
 
             person.children.forEach((t, i) => {
-                drawSvg(t, i, svgId, { hPathWidth, vPathHeight: extraParams.vPathHeight, cL, hStartPt, vPathY: extraParams.vPathHeight + hMidPt, hMidPt, step: extraParams.step + 1 })
+                drawSvg(t, i, svgId, { hPathWidth, vPathHeight: extraParams.vPathHeight, cL, hStartPt, vPathY: extraParams.vPathHeight + hMidPt + extraParams.vPathY, hMidPt, step: extraParams.step + 1 })
             })
         }
 
@@ -292,7 +299,7 @@ function drawSvg(name, index, svgId, extraParams) {
         if (extraParams.cL > 1) {
             createPath(svgId, { d: `M ${hStartPt} ${(extraParams.vPathHeight + extraParams.hMidPt) * extraParams.step} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
         } else {//extraParams.vPathHeight * 3 + midpt
-            createPath(svgId, { d: `M ${hStartPt} ${extraParams.hMidPt + (extraParams.vPathHeight * extraParams.step) + extraParams.vPathHeight} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+            createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathY} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
         }
 
         createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
