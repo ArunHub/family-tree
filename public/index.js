@@ -6,7 +6,7 @@ const sample = [
         "gender": GENDER.M,
         "_age": 68,
         "lifeSpan": { bornOn: "01-01-1940" },
-        "children": ["soundarapandian", "mani", "selvakumar"],
+        "children": ["soundarapandian","mani", "selvakumar"],
         "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE }
     },
     {
@@ -22,7 +22,7 @@ const sample = [
         "gender": "F",
         "_age": 28,
         "spouse": "vijayaprabhu",
-        "children": ["sanvika", "sandy"],
+        "children": ["sanvika"],
         "siblings": ["sudarshan", 'sudaabi']
     },
     {
@@ -47,7 +47,7 @@ const sample = [
         "gender": "M",
         "_age": 48,
         "spouse": "pushparani",
-        "children": ["rashika","shamdeepak"],
+        "children": ["rashika", "shamdeepak"],
         "siblings": ["soundarapandian", "mani"]
     },
     {
@@ -63,6 +63,7 @@ const sample = [
         "gender": "M",
         "isParent": true,
         "spouse": "vijaya",
+        // "children":["sandy"],
         "_age": 31,
         "siblings": ['abinaya', 'sudarshan']
     },
@@ -203,7 +204,8 @@ function getDomTree(name, rootId, level = 0) {
             const hPathWidth = hTotalW * treeWeight;
 
             const docWidth = document.defaultView.innerWidth;
-            const hStartPt = (docWidth - (hPathWidth)) / 2;
+            // const hStartPt = cL > 1 ? (docWidth - (hPathWidth)) / 2 : ((docWidth - (hPathWidth)) / 2) + quarter;
+            const hStartPt = cL > 1 ? (docWidth - (hPathWidth)) / 2 : ((docWidth - (hTotalW)) / 2) + hMidPt;
 
             const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" viewBox="-8 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
       preserveAspectRatio="${preserveAspectRatio}">
