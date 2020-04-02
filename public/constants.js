@@ -17,6 +17,7 @@ const MARITAL_STATUS = {
 }
 
 const strWidth = 2;
+const textHeight = 16;
 const mL = 10; //margin-left
 
 const xmlns = "http://www.w3.org/2000/svg"; 

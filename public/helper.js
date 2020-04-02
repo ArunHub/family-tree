@@ -20,6 +20,8 @@ function getImage(gender) {
   }
 };
 
+const nameCapitalized = (name) => name.charAt(0).toUpperCase() + name.slice(1)
+
 function setAttributesNs(el, attrs) {
   Object.keys(attrs).forEach(key => el.setAttributeNS(null, key, attrs[key]));
 }
