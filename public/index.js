@@ -6,8 +6,10 @@ const sample = [
         "gender": GENDER.M,
         "_age": 68,
         "lifeSpan": { bornOn: "01-01-1940" },
-        "children": ["soundarapandian","mani", "selvakumar"],
-        "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE }
+        "children": ["soundarapandian", "mani", "selvakumar"],
+        "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE },
+        "father": "iyyamperumal",
+        "mother": "thangammal"
     },
     {
         "name": "soundarapandian",
@@ -15,15 +17,20 @@ const sample = [
         "_age": 58,
         "spouse": "thulasirani",
         "children": ["sudarshan", "abinaya", 'sudaabi'],
-        "siblings": ["mani", "selvakumar"]
+        "siblings": ["mani", "selvakumar"],
+        "father": "iyyamperumal",
+        "mother": "thangammal"
     },
     {
         "name": "abinaya",
         "gender": "F",
         "_age": 28,
         "spouse": "vijayaprabhu",
-        "children": ["sanvika"],
-        "siblings": ["sudarshan", 'sudaabi']
+        // "children": ["sanvika"],
+        "children": ["sanvika", "sandy"],
+        "siblings": ["sudarshan", 'sudaabi'],
+        "father": "soundarapandian",
+        "mother": "thulasirani"
     },
     {
         "name": "vijayaprabhu",
@@ -32,7 +39,9 @@ const sample = [
         "spouse": "abinaya",
         "_age": 31,
         "children": ["sanvika"],
-        "siblings": []
+        "siblings": [],
+        "father": "vijayaprabhu",
+        "mother": "vijayaprabhu",
     },
     {
         "name": "mani",
@@ -40,15 +49,21 @@ const sample = [
         "_age": 54,
         "spouse": "sundari",
         "children": ["arun", "preethi"],
-        "siblings": ["soundarapandian", "selvakumar"]
+        "siblings": ["soundarapandian", "selvakumar"],
+        "father": "iyyamperumal",
+        "mother": "thangammal"
     },
     {
         "name": "selvakumar",
         "gender": "M",
         "_age": 48,
         "spouse": "pushparani",
-        "children": ["rashika", "shamdeepak"],
-        "siblings": ["soundarapandian", "mani"]
+        // "spouse": "",
+        "children": ["rashika"],
+        // "children": ["rashika", "shamdeepak"],
+        "siblings": ["soundarapandian", "mani"],
+        "father": "iyyamperumal",
+        "mother": "thangammal"
     },
     {
         "name": "sudarshan",
@@ -56,16 +71,20 @@ const sample = [
         "isParent": true,
         "spouse": "",
         "_age": 31,
-        "siblings": ['abinaya', 'sudaabi']
+        "siblings": ['abinaya', 'sudaabi'],
+        "father": "soundarapandian",
+        "mother": "thulasirani"
     },
     {
         "name": "sudaabi",
         "gender": "M",
         "isParent": true,
         "spouse": "vijaya",
-        // "children":["sandy"],
+        "children": ["sandy"],
         "_age": 31,
-        "siblings": ['abinaya', 'sudarshan']
+        "siblings": ['abinaya', 'sudarshan'],
+        "father": "soundarapandian",
+        "mother": "thulasirani"
     },
     {
         "name": "vijaya",
@@ -74,35 +93,45 @@ const sample = [
         "spouse": "sudaabi",
         "_age": 31,
         "children": [],
-        "siblings": []
+        "siblings": [],
+        "father": "vijaya",
+        "mother": "vijaya",
     },
     {
         "name": "sanvika",
         "gender": "F",
         "spouse": "",
         "_age": 0.5,
-        "siblings": []
+        "siblings": [],
+        "father": "abinaya",
+        "mother": "abinaya",
     },
     {
         "name": "arun",
         "gender": "M",
         "spouse": "",
         "_age": 31,
-        "siblings": ['preethi']
+        "siblings": ['preethi'],
+        "father": "mani",
+        "mother": "sundari",
     },
     {
         "name": "shamdeepak",
         "gender": "M",
         "spouse": "",
         "_age": 31,
-        "siblings": ['rashika']
+        "siblings": ['rashika'],
+        "father": "selvakumar",
+        "mother": "pushparani",
     },
     {
         "name": "sandy",
         "gender": "M",
         "spouse": "",
         "_age": 31,
-        "siblings": ['rashika']
+        "siblings": ['rashika'],
+        "father": "vijayaprabhu",
+        "mother": "abinaya",
     },
     {
         "name": "preethi",
@@ -110,7 +139,9 @@ const sample = [
         "_age": 28,
         "spouse": "",
         "children": [],
-        "siblings": ["arun"]
+        "siblings": ["arun"],
+        "father": "mani",
+        "mother": "sundari",
     },
     {
         "name": "rashika",
@@ -118,7 +149,9 @@ const sample = [
         "_age": 28,
         "spouse": "",
         "children": [],
-        "siblings": ["shamdeepak"]
+        "siblings": ["shamdeepak"],
+        "father": "selvakumar",
+        "mother": "pushparani",
     },
 ]
 
@@ -133,6 +166,7 @@ function Person(obj) {
     this.profession = obj.profession //private
     this.lifeSpan = obj.lifeSpan;
     this.childCount = this.children.length;
+    this.initial = getInitial(obj);
     // this.anniversary = getAnniversary(obj.anniversary);
     // this.pathId = "";
 }
@@ -171,11 +205,15 @@ function getChildCount(name, count = 1) {
     return num;
 }
 
-function getDomTree(name, rootId, level = 0) {
+function getInitial(obj) {
+    return obj.gender === "M" ? obj.father.charAt() + obj.mother.charAt() : obj.spouse ? obj.spouse.charAt() : obj.father.charAt() + obj.mother.charAt();
+}
+
+function getDomTree(name, rootId) {
     const person = getPerson(name);
     if (person.spouse) {
         const p1 = document.createElement('div');
-        const id = name + '-tree-' + level;
+        const id = name + "-" + person.initial;
         // if (level > 0) {
         //     const pathElem = document.getElementById(person.pathId);
         //     const position = pathElem.getClientRects();
@@ -207,16 +245,16 @@ function getDomTree(name, rootId, level = 0) {
             // const hStartPt = cL > 1 ? (docWidth - (hPathWidth)) / 2 : ((docWidth - (hPathWidth)) / 2) + quarter;
             const hStartPt = cL > 1 ? (docWidth - (hPathWidth)) / 2 : ((docWidth - (hTotalW)) / 2) + hMidPt;
 
-            const svgElOne = `<svg id="svg1-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" viewBox="-8 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
+            const svgElOne = `<svg id="svg1-${id}" xmlns="${xmlns}" version="${version}" viewBox="-8 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
       preserveAspectRatio="${preserveAspectRatio}">
       <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
       <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>`;
 
-            const svgElTwo = `<svg id="svg2-${id}" class="svg-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
+            const svgElTwo = `<svg id="svg2-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
       preserveAspectRatio="${preserveAspectRatio}">
       ${cL > 1 ? `<path d="M ${hStartPt} ${strWidth} H ${(hPathWidth) + hStartPt}" stroke="${strGreen}" stroke-width="${strWidth}" /> ` : ""}
       `;
-            //first horizontal path or TODO: single child vertical path
+            //first horizontal path
             currentParentID.innerHTML += svgElOne;
             currentParentID.innerHTML += svgElTwo;
 
@@ -231,7 +269,7 @@ function getDomTree(name, rootId, level = 0) {
 
             person.children.forEach((t, i) => {
                 // setPathId(t, `path-svg2-${id}-${i}`);
-                drawSvg(t, i, `svg2-${id}`, { hPathWidth, vPathHeight: hMidPt, hMidPt: 0, cL, hStartPt, vPathY: 0, step: 0 });
+                drawSvg(t, i, `svg2-${id}`, { hPathWidth, vPathHeight: hMidPt, hMidPt: 0, cL, hStartPt, vPathY: 0, step: 0, initial: person.initial });
             })
         } else {
             //TODO:he/she is waiting hehe
@@ -239,7 +277,7 @@ function getDomTree(name, rootId, level = 0) {
         }
     } else {
         const child = document.createElement('div');
-        const id = name + '-tree-' + level;
+        const id = name + "-" + person.initial;
         setAttributes(child, { id })
         child.innerHTML = name;
         document.getElementById(rootId).appendChild(child);
@@ -255,8 +293,6 @@ function drawSvg(name, index, svgId, extraParams) {
         //first child vertical path
         createPath(svgId, { d: `M ${hStartPt} ${(extraParams.vPathHeight + extraParams.hMidPt) * extraParams.step} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
 
-        // createPath(svgId, { d: `M ${hStartPt} ${extraParams.hMidPt} L ${hStartPt} ${extraParams.hMidPt + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
-
         //parent one
         createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
 
@@ -265,31 +301,39 @@ function drawSvg(name, index, svgId, extraParams) {
         //parent two
         createText(person.spouse, svgId, { id: person.spouse + "-path", x: (hStartPt) + p1Dimension.width, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
 
+        const pathId2 = document.getElementById(`${person.spouse}-path`);
+        const p2Width = pathId2.getClientRects()[0].width;
+
+        const hTotalW = p1Dimension.width + p2Width;
+        const hMidPt = (hTotalW) / 2;
+        const newHstart = hStartPt - hMidPt;
+
+        setAttributesNs(pathId1, { x: newHstart });
+        setAttributesNs(pathId2, { x: newHstart + p1Dimension.width });
+
         if (person.childCount) {
-            const pathId2 = document.getElementById(`${person.spouse}-path`);
-            const p2Width = pathId2.getClientRects()[0].width;
             const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
 
             const treeWeight = childCount / 2;
             const cL = person.childCount;
 
-            const hTotalW = p1Dimension.width + p2Width;
             const quarter = (hTotalW) / 4;
-            const hMidPt = (hTotalW) / 2;
             const hPathWidth = hTotalW * treeWeight;
 
             //parent one slanting path
-            createPath(svgId, { d: `M ${(hStartPt) + quarter} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+            createPath(svgId, { d: `M ${(newHstart) + quarter} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(newHstart) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
 
             //parent two slanting path
-            createPath(svgId, { d: `M ${(hStartPt) + quarter * 3} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(hStartPt) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
+            createPath(svgId, { d: `M ${(newHstart) + quarter * 3} ${((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight} L ${(newHstart) + hMidPt} ${hMidPt + ((extraParams.vPathHeight * 2) * extraParams.step) + extraParams.vPathHeight}`, stroke: `${strOrange}`, strokeWidth: `${strWidth}` });
 
             const defaultVpathY = extraParams.vPathY ? extraParams.vPathHeight + hMidPt + extraParams.vPathY : extraParams.vPathHeight + hMidPt;
-            // horizontal path
-            cL > 1 && createPath(svgId, { d: `M ${hStartPt} ${defaultVpathY} H ${(hPathWidth) + hStartPt}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` }) //TODO: second level
 
+            // horizontal path
+            cL > 1 && createPath(svgId, { d: `M ${newHstart} ${defaultVpathY} H ${(hPathWidth) + newHstart}`, stroke: `${strGreen}`, strokeWidth: `${strWidth}` })
+
+            //looping children
             person.children.forEach((t, i) => {
-                drawSvg(t, i, svgId, { hPathWidth, vPathHeight: extraParams.vPathHeight, cL, hStartPt, vPathY: defaultVpathY, hMidPt, step: extraParams.step + 1 })
+                drawSvg(t, i, svgId, { hPathWidth, vPathHeight: extraParams.vPathHeight, cL, hStartPt: newHstart, vPathY: defaultVpathY, hMidPt, step: extraParams.step + 1 })
             })
         }
 
@@ -302,6 +346,13 @@ function drawSvg(name, index, svgId, extraParams) {
         }
 
         createText(person.name, svgId, { id: name + "-path", x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight });
+
+        const pathId = document.getElementById(`${name}-path`);
+        const width = pathId.getClientRects()[0].width;
+
+        const hMidPt = (width) / 2;
+        const newHstart = hStartPt - hMidPt;
+        setAttributesNs(pathId, { x: newHstart });
     }
 }
 
@@ -315,8 +366,10 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 const newJson = new Tree(sample);
 getDomTree("iyyamperumal", 'tree-structure');
-
-
+// getDomTree("soundarapandian", 'tree-structure');
+// getDomTree("mani", 'tree-structure');
+// getDomTree("abinaya", 'tree-structure');
+// getDomTree("sudaabi", 'tree-structure');
 
 
 function handleSearch(e) {
