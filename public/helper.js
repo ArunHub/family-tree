@@ -20,6 +20,19 @@ function getImage(gender) {
   }
 };
 
+function getTreeWeight(count) {
+  return Math.max(2, count) - 2;
+}
+
+function getLastName(lname) {
+  return (lname ? ` ${lname}` : "");
+}
+
+function getInitial(person) {
+  return person.gender === GENDER.M ? person.father.charAt() + person.mother.charAt() : person.spouse ? person.spouse.charAt() : person.father.charAt() + person.mother.charAt();
+}
+
+
 const nameCapitalized = (name) => name.charAt(0).toUpperCase() + name.slice(1)
 
 function setAttributesNs(el, attrs) {
