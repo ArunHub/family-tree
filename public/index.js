@@ -7,6 +7,7 @@ const sample = [
         "gender": "M",
         "_age": 68,
         "lifeSpan": { bornOn: "01-01-1940" },
+        // "children": ["poongudi", "soundara pandian", "mani", "selva kumar"],
         "children": ["soundara pandian", "mani", "selva kumar"],
         "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE },
         "father": "iyyam perumal",
@@ -54,8 +55,8 @@ const sample = [
         "gender": "F",
         "_age": 28,
         "spouse": "vijay prabhu",
-        // "children": ["sanvika"],
-        "children": ["sanvika", "sandy"],
+        "children": ["sanvika"],
+        // "children": ["sanvika", "sandy"],
         "siblings": ["sudarshan", 'sudaabi'], //TODO: remove siblings
         "father": "soundara pandian",
         "mother": "thulasirani"
@@ -79,6 +80,7 @@ const sample = [
         "_age": 54,
         "spouse": "sundari",
         "children": ["arun kumar", "preethi"],
+        // "children": ["arun kumar", "preethi",'sanvika','sandy','rajavel','rashika'],
         "siblings": ["soundara pandian", "selva kumar"],
         "father": "iyyam perumal",
         "mother": "thangammal"
@@ -215,6 +217,77 @@ const sample = [
         "father": "selva kumar",
         "mother": "pushparani",
     },
+    {
+        "fname": "raja",
+        "lname": "manickam",
+        "gender": "M",
+        "_age": 68,
+        "spouse": "poongudi",
+        "children": ["raja", "muthu"],
+        "father": "iyyam perumal",
+        "mother": "thangammal"
+    },
+    {
+        "fname": "poongudi",
+        "lname": "",
+        "gender": "F",
+        "_age": 58,
+        "spouse": "raja manickam",
+        "children": ["raja", "muthu"],
+        "siblings": ["mani", "selva kumar"],
+        "father": "iyyam perumal", //TODO
+        "mother": "thangammal"
+    },
+    {
+        "fname": "raja",
+        "lname": "",
+        "gender": "M",
+        "_age": 48,
+        "spouse": "raji",
+        "children": ["rajavel"],
+        "father": "raja manickam",
+        "mother": "poongudi"
+    },
+    {
+        "fname": "raji",
+        "lname": "",
+        "gender": "F",
+        "_age": 38,
+        "spouse": "raja",
+        "children": ["rajavel"],
+        "father": "iyyam perumal", //TODO
+        "mother": "thangammal"
+    },
+    {
+        "fname": "rajavel",
+        "lname": "",
+        "gender": "M",
+        "_age": 8,
+        "spouse": "",
+        "children": [],
+        "father": "raja",
+        "mother": "raji"
+    },
+    {
+        "fname": "muthu",
+        "lname": "",
+        "gender": "M",
+        "_age": 40,
+        "spouse": "akka",
+        "children": [],
+        "father": "raja manickam",
+        "mother": "poongudi"
+    },
+    {
+        "fname": "akka",
+        "lname": "",
+        "gender": "F",
+        "_age": 38,
+        "spouse": "muthu",
+        "children": [],
+        "father": "raja manickam",
+        "mother": "poongudi"
+    },
 ]
 
 function Person(obj) {
@@ -279,6 +352,7 @@ function getChildCount(name, count = 1) {
 
 function getDomTree(name, rootId) {
     const person = getPerson(name);
+    //TODO: going local culture now as spouse required to check children contrary to modern culture
     if (person.spouse) {
         const p1 = document.createElement('div');
         const id = (person.fname + person.lname) + "-" + getInitial(person);
@@ -297,26 +371,21 @@ function getDomTree(name, rootId) {
             const cL = person.childCount;
             const currentParentID = document.getElementById(id);
             const parentWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
-            const hTotalW = parentWidth + mL;
+            const hTotalW = parentWidth;
             const quarter = (hTotalW) / 4;
             const hMidPt = (hTotalW) / 2;
 
 
             const hPathWidth = hTotalW * treeWeight;
 
-            const docWidth = document.defaultView.innerWidth;
-            const hStartPt = cL > 1 ? (docWidth - (hPathWidth)) / 2 : ((docWidth - (hTotalW)) / 2) + hMidPt;
+            const bodyWidth = document.documentElement.offsetWidth;
+            const hStartPt = cL > 1 ? (bodyWidth - hPathWidth) / 2 : ((bodyWidth - hTotalW) / 2) + hMidPt;
 
-            const svgElOne = `<svg id="svg1-${id}" xmlns="${xmlns}" version="${version}" viewBox="-8 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
+            const svgElOne = `<svg id="svg1-${id}" xmlns="${xmlns}" version="${version}" viewBox="0 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
       preserveAspectRatio="${preserveAspectRatio}">
-        <defs>
-            
-        </defs>
       <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
       <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>
       `;
-            //   <path d="M0,0 L2,4 4,0 Z" />
-
 
             const svgElTwo = `<svg id="svg2-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
       preserveAspectRatio="${preserveAspectRatio}">
@@ -403,7 +472,7 @@ function drawSvg(name, index, svgId, extraParams) {
         if (extraParams.cL > 1) {//path for adult
             createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathY} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}` });
         } else {//path for child
-            createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathY + textHeight / 2} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}` });
+            createPath(svgId, { d: `M ${hStartPt} ${extraParams.vPathY + (textHeight / 2)} L ${hStartPt} ${((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight}`, stroke: `${strOrange}` });
         }
 
         createText(nameCapitalized(person.name), svgId, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
