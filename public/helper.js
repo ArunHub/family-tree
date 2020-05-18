@@ -52,6 +52,25 @@ function createText(value, rootTag, attrs) {
   id.appendChild(textElement);
 }
 
+function createForeignText(value, rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const text = `<text >${value}</text>`
+  const textElement = document.createElementNS(xmlns, 'text');
+  // const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+  const nodevalue = document.createTextNode(value);
+  textElement.appendChild(nodevalue);
+  setAttributesNs(textElement, attrs);
+  // setAttributesNs(foreignObjEl, { width: 100, height: 16 });
+  // foreignObjEl.appendChild(textElement);
+  const foreignObj = `<foreignObject id="${attrs.id}" width="50" height="16">${text}</foreignObject>`;
+  foreignObj.innerHTML = textElement;
+  id.innerHTML = foreignObj;
+  // id.appendChild(foreignObjEl);
+}
+
+
+
+
 function getSpanList() {
   const fragment = new DocumentFragment();
 

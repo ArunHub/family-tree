@@ -17,6 +17,7 @@ const MARITAL_STATUS = {
 }
 
 const strWidth = 2;
+const textWidth = 100;
 const textHeight = 16;
 const mL = 10; //margin-left
 

@@ -353,15 +353,23 @@ function getChildCount(name, count = 1) {
 function getDomTree(name, rootId) {
     const person = getPerson(name);
     //TODO: going local culture now as spouse required to check children contrary to modern culture
-    if (person.spouse) {
+    const id = (person.fname + person.lname) + "-" + getInitial(person);
+    const htmlWidth = document.documentElement.offsetWidth;
+    const rootSvg = `<svg id="root-svg" xmlns="${xmlns}" version="${version}" width="${htmlWidth}">`;
+    const parentId = document.getElementById(rootId);
+    parentId.innerHTML = rootSvg;
+    const personName = nameCapitalized(person.name);
+    if (false && person.spouse) {
+
+
+        createText(personName, `root-svg-${id}`, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
+
         const p1 = document.createElement('div');
-        const id = (person.fname + person.lname) + "-" + getInitial(person);
 
         setAttributes(p1, { id });
         const spanList = getSpanList(nameCapitalized(person.name), nameCapitalized(person.spouse));
         p1.appendChild(spanList);
-        const parentId = document.getElementById(rootId);
-        parentId.appendChild(p1);
+
 
         if (person.childCount) {
 
@@ -403,11 +411,11 @@ function getDomTree(name, rootId) {
             //newly married/waiting for child for long according with marriage date
         }
     } else {
-        const child = document.createElement('div');
-        const id = (person.fname + person.lname) + "-" + getInitial(person);
-        setAttributes(child, { id })
-        child.innerHTML = name;
-        document.getElementById(rootId).appendChild(child);
+        createForeignText(personName, `root-svg`, { id, x: 0, y: textHeight });
+        const parentOneId = document.getElementById(id);
+        const p1Dimension = parentOneId.getClientRects()[0];
+        const x = (htmlWidth - p1Dimension.width) / 2;
+        setAttributesNs(parentOneId, { x });
     }
 }
 
