@@ -68,6 +68,27 @@ function createForeignText(value, rootTag, attrs) {
   // id.appendChild(foreignObjEl);
 }
 
+function createParentForeignText(person, rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const text1 = `<span style="width:50px">${person.name}</span>`;
+  const text2 = `<span style="width:50px">${person.spouse}</span>`;
+  // const textElement1 = document.createElementNS(xmlns, 'text');
+  // const textElement2 = document.createElementNS(xmlns, 'text');
+  // const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+  // const nodevalue1 = document.createTextNode(person.name);
+  // const nodevalue2 = document.createTextNode(person.spouse);
+  // textElement1.appendChild(nodevalue1);
+  // textElement2.appendChild(nodevalue2);
+  // setAttributesNs(textElement1, {x:0, y:16});
+  // setAttributesNs(textElement2, {dx:55});
+  // setAttributesNs(foreignObjEl, { width: 100, height: 16 });
+  // foreignObjEl.appendChild(textElement);
+  const foreignObj = `<foreignObject id="${attrs.id}" width="205" height="16">${text1} ${text2}</foreignObject>`;
+  // foreignObj.innerHTML += textElement1;
+  // foreignObj.innerHTML += textElement2;
+  id.innerHTML = foreignObj;
+  // id.appendChild(foreignObjEl);
+}
 
 
 

@@ -359,19 +359,29 @@ function getDomTree(name, rootId) {
     const parentId = document.getElementById(rootId);
     parentId.innerHTML = rootSvg;
     const personName = nameCapitalized(person.name);
-    if (false && person.spouse) {
-
-
-        createText(personName, `root-svg-${id}`, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
-
-        const p1 = document.createElement('div');
-
-        setAttributes(p1, { id });
-        const spanList = getSpanList(nameCapitalized(person.name), nameCapitalized(person.spouse));
-        p1.appendChild(spanList);
-
+    if (person.spouse) {
+        createParentForeignText(person, `root-svg`, { id, x: 0, y: textHeight });
+        const parentOneId = document.getElementById(id);
+        const p1Dimension = parentOneId.getClientRects()[0];
+        const x = (htmlWidth - p1Dimension.width) / 2;
+        setAttributesNs(parentOneId, { x });
 
         if (person.childCount) {
+            const treeWeight = person.treeWeight;
+            console.log('dddddddd', treeWeight*100);
+//confused and struck at seperating two text inside foreignobject
+        }
+
+        // createText(personName, `root-svg-${id}`, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
+
+        // const p1 = document.createElement('div');
+
+        // setAttributes(p1, { id });
+        // const spanList = getSpanList(nameCapitalized(person.name), nameCapitalized(person.spouse));
+        // p1.appendChild(spanList);
+
+
+        if (false && person.childCount) {
 
             // const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
 
