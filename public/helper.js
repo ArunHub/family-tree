@@ -54,21 +54,11 @@ function createText(value, rootTag, attrs) {
 
 function createForeignText(value, rootTag, attrs) {
   const id = document.getElementById(rootTag);
-  const text = `<div class="foreign-div">${value}</div>`
-  // const textElement = document.createElementNS(xmlns, 'text');
-  // const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-  // const nodevalue = document.createTextNode(value);
-  // textElement.appendChild(nodevalue);
-  // setAttributesNs(textElement, attrs);
-  // setAttributesNs(foreignObjEl, { width: 100, height: 16 });
-  // foreignObjEl.appendChild(textElement);
-  const foreignObj = `<foreignObject id="${attrs.id}" width="80" height="16">${text}</foreignObject>`;
-
-// start to include attrs dynamically in above line
-
-  // foreignObj.innerHTML = textElement;
-  id.innerHTML += foreignObj;
-  // id.appendChild(foreignObjEl);
+  const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+  const divFragment = getDivList(...value);
+  setAttributesNs(foreignObjEl, { id: attrs.id, width: (value.length * textWidth) + 5, height: textHeight });
+  foreignObjEl.appendChild(divFragment);
+  id.appendChild(foreignObjEl);
 }
 
 function createParentForeignText(person, rootTag, attrs) {
@@ -93,31 +83,31 @@ function createParentForeignText(person, rootTag, attrs) {
   // id.appendChild(foreignObjEl);
 }
 
-
-
-function getSpanList() {
+function getDivList() {
   const fragment = new DocumentFragment();
 
   Object.values(arguments).forEach(function (name) {
-    var span = document.createElement('span');
-    span.setAttribute('class', 'parentNode')
-    span.innerHTML = name
-    fragment.appendChild(span)
+    var divEl = document.createElement('div');
+    setAttributes(divEl, { class: "foreign-div" });
+    divEl.innerHTML = name;
+    fragment.appendChild(divEl);
   })
 
   return fragment;
 }
 
-function getPathList(rootId, w, h, cL, strWidth) {
-  const id = document.getElementById(rootId);
-  const width = w / (cL - 1);
-  // let tempArr = [];
-  for (let index = 0; index < cL; index++) {
-    // tempArr.push(width * index);
-    const path = `<path id="path-${rootId}-${index}" d="M ${width * index} 0 V ${h}" stroke="orange" stroke-width="${strWidth}" />`;
-    id.innerHTML += path;
-  }
-  // return tempArr;
+function getSpanList() {
+  const fragment = new DocumentFragment();
+
+  Object.values(arguments).forEach(function (value) {
+    var span = document.createElement('span');
+    span.setAttribute('class', 'parentNode');
+    const name = nameCapitalized(value);
+    span.innerHTML = name;
+    fragment.appendChild(span)
+  })
+
+  return fragment;
 }
 
 function createPath(rootTag, attrs) {

@@ -355,12 +355,11 @@ function getDomTree(name, rootId) {
     //TODO: going local culture now as spouse required to check children contrary to modern culture
     const id = (person.fname + person.lname) + "-" + getInitial(person);
     const htmlWidth = document.documentElement.offsetWidth;
-    const rootSvg = `<svg id="root-svg" xmlns="${xmlns}" version="${version}" width="${htmlWidth}">`;
+    const rootSvgEl = `<svg id="root-svg" xmlns="${xmlns}" version="${version}" width="${htmlWidth}">`;
     const parentId = document.getElementById(rootId);
-    parentId.innerHTML = rootSvg;
-    const personName = nameCapitalized(person.name);
+    parentId.innerHTML = rootSvgEl;
     if (person.spouse) {
-        createParentForeignText(person, `root-svg`, { id, x: 0, y: textHeight });
+        createForeignText([person.name, person.spouse], rootSvgId, { id });
         const parentOneId = document.getElementById(id);
         const p1Dimension = parentOneId.getClientRects()[0];
         const x = (htmlWidth - p1Dimension.width) / 2;
@@ -381,20 +380,15 @@ function getDomTree(name, rootId) {
                 if (cL > 1) {
 
                 } else {
-                    //                 <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
-                    //   <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>
-                    createPath("root-svg", { d: `M ${quarter + x} 0 L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
-                    createPath("root-svg", { d: `M ${quarter * 3 + x} 0 L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
-
+                    //from quarter one
+                    createPath("root-svg", { d: `M ${quarter + x}  ${textHeight} L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
+                    //from quarter two
+                    createPath("root-svg", { d: `M ${quarter * 3 + x}  ${textHeight} L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
+                    //middle line
                     createPath("root-svg", { d: `M ${hMidPt + x} ${hMidPt} L ${hMidPt + x} ${hMidPt + hMidPt}`, stroke: `${strOrange}` });
-
-                    createForeignText('sanvika', `root-svg`, { id: 'sanvika-v', x: 0, y: textHeight });
+                    //single child
+                    createForeignText(['sanvika'], rootSvgId, { id: 'sanvika-v' });
                 }
-
-
-                // createLine("root-svg", {x1: hMidPt + x, y1: hMidPt + (textHeight), x2: hMidPt + x, y2: hMidPt,stroke: strOrange })
-
-                // createText(nameCapitalized(person.name), svgId, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
             }
         }
 
@@ -447,7 +441,7 @@ function getDomTree(name, rootId) {
             //newly married/waiting for child for long according with marriage date
         }
     } else {
-        createForeignText(personName, `root-svg`, { id, x: 0, y: textHeight });
+        createForeignText(person.name, rootSvgId, { id});
         const parentOneId = document.getElementById(id);
         const p1Dimension = parentOneId.getClientRects()[0];
         const x = (htmlWidth - p1Dimension.width) / 2;

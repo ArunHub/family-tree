@@ -26,6 +26,8 @@ const textHeight = 20;
 const xmlns = "http://www.w3.org/2000/svg";
 const preserveAspectRatio = "xMidYMid meet";
 const version = "1.1";
+const rootSvgId = 'root-svg';
+
 
 const strOrange = "orange";
 const strGreen = "green";
