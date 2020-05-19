@@ -54,24 +54,27 @@ function createText(value, rootTag, attrs) {
 
 function createForeignText(value, rootTag, attrs) {
   const id = document.getElementById(rootTag);
-  const text = `<text >${value}</text>`
-  const textElement = document.createElementNS(xmlns, 'text');
+  const text = `<div class="foreign-div">${value}</div>`
+  // const textElement = document.createElementNS(xmlns, 'text');
   // const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-  const nodevalue = document.createTextNode(value);
-  textElement.appendChild(nodevalue);
-  setAttributesNs(textElement, attrs);
+  // const nodevalue = document.createTextNode(value);
+  // textElement.appendChild(nodevalue);
+  // setAttributesNs(textElement, attrs);
   // setAttributesNs(foreignObjEl, { width: 100, height: 16 });
   // foreignObjEl.appendChild(textElement);
-  const foreignObj = `<foreignObject id="${attrs.id}" width="50" height="16">${text}</foreignObject>`;
-  foreignObj.innerHTML = textElement;
-  id.innerHTML = foreignObj;
+  const foreignObj = `<foreignObject id="${attrs.id}" width="80" height="16">${text}</foreignObject>`;
+
+// start to include attrs dynamically in above line
+
+  // foreignObj.innerHTML = textElement;
+  id.innerHTML += foreignObj;
   // id.appendChild(foreignObjEl);
 }
 
 function createParentForeignText(person, rootTag, attrs) {
   const id = document.getElementById(rootTag);
-  const text1 = `<span style="width:50px">${person.name}</span>`;
-  const text2 = `<span style="width:50px">${person.spouse}</span>`;
+  const text1 = `<div class="foreign-div">${person.name}</div>`;
+  const text2 = `<div class="foreign-div">${person.spouse}</div>`;
   // const textElement1 = document.createElementNS(xmlns, 'text');
   // const textElement2 = document.createElementNS(xmlns, 'text');
   // const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
@@ -83,7 +86,7 @@ function createParentForeignText(person, rootTag, attrs) {
   // setAttributesNs(textElement2, {dx:55});
   // setAttributesNs(foreignObjEl, { width: 100, height: 16 });
   // foreignObjEl.appendChild(textElement);
-  const foreignObj = `<foreignObject id="${attrs.id}" width="205" height="16">${text1} ${text2}</foreignObject>`;
+  const foreignObj = `<foreignObject id="${attrs.id}" width="${foreignWidth}" height="${textHeight}">${text1} ${text2}</foreignObject>`;
   // foreignObj.innerHTML += textElement1;
   // foreignObj.innerHTML += textElement2;
   id.innerHTML = foreignObj;
@@ -129,4 +132,11 @@ function createSvg(rootTag, attrs) {
   const element = `<svg id="${attrs.id}" xmlns="${xmlns}" version="${version}" viewBox="${attrs.viewBox}" width="${attrs.width}" height="${attrs.height}"
       preserveAspectRatio="${preserveAspectRatio}" />`;
   id.innerHTML += element;
+}
+
+function createLine(rootTag, attrs) {
+  const id = document.getElementById(rootTag);
+  const element = document.createElementNS(xmlns, 'line');
+  setAttributesNs(element, attrs);
+  id.appendChild(element);
 }

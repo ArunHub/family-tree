@@ -365,11 +365,37 @@ function getDomTree(name, rootId) {
         const p1Dimension = parentOneId.getClientRects()[0];
         const x = (htmlWidth - p1Dimension.width) / 2;
         setAttributesNs(parentOneId, { x });
+        const cL = person.childCount;
+        if (cL) {
+            const hTotalW = person.treeWeight * foreignWidth;
+            const quarter = (hTotalW) / 4;
+            const hMidPt = (hTotalW) / 2;
+            const hWidthLimit = htmlWidth * middleRatio;
+            if (hTotalW > hWidthLimit) {
+                const newHtmlWidth = hTotalW / middleRatio;
+                const rootEl = document.getElementById("root-svg");
+                setAttributesNs(rootEl, { width: newHtmlWidth });
+                const newX = (newHtmlWidth - p1Dimension.width) / 2;
+                setAttributesNs(parentOneId, { x: newX });
+            } else {
+                if (cL > 1) {
 
-        if (person.childCount) {
-            const treeWeight = person.treeWeight;
-            console.log('dddddddd', treeWeight*100);
-//confused and struck at seperating two text inside foreignobject
+                } else {
+                    //                 <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
+                    //   <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>
+                    createPath("root-svg", { d: `M ${quarter + x} 0 L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
+                    createPath("root-svg", { d: `M ${quarter * 3 + x} 0 L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
+
+                    createPath("root-svg", { d: `M ${hMidPt + x} ${hMidPt} L ${hMidPt + x} ${hMidPt + hMidPt}`, stroke: `${strOrange}` });
+
+                    createForeignText('sanvika', `root-svg`, { id: 'sanvika-v', x: 0, y: textHeight });
+                }
+
+
+                // createLine("root-svg", {x1: hMidPt + x, y1: hMidPt + (textHeight), x2: hMidPt + x, y2: hMidPt,stroke: strOrange })
+
+                // createText(nameCapitalized(person.name), svgId, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
+            }
         }
 
         // createText(personName, `root-svg-${id}`, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
@@ -515,10 +541,10 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 const newJson = new Tree(sample);
 newJson.setChildCount();
-getDomTree("iyyam perumal", 'tree-structure');
+// getDomTree("iyyam perumal", 'tree-structure');
 // getDomTree("soundara pandian", 'tree-structure');
 // getDomTree("mani", 'tree-structure');
-// getDomTree("abinaya", 'tree-structure');
+getDomTree("abinaya", 'tree-structure');
 // getDomTree("sudaabi", 'tree-structure');
 
 

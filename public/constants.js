@@ -17,11 +17,13 @@ const MARITAL_STATUS = {
 }
 
 const strWidth = 2;
-const textWidth = 100;
-const textHeight = 16;
 const mL = 10; //margin-left
+const middleRatio = 0.75;
+const textWidth = 80;
+const foreignWidth = 2 * textWidth + (5);
+const textHeight = 20;
 
-const xmlns = "http://www.w3.org/2000/svg"; 
+const xmlns = "http://www.w3.org/2000/svg";
 const preserveAspectRatio = "xMidYMid meet";
 const version = "1.1";
 
