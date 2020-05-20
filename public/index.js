@@ -55,8 +55,8 @@ const sample = [
         "gender": "F",
         "_age": 28,
         "spouse": "vijay prabhu",
-        "children": ["sanvika"],
-        // "children": ["sanvika", "sandy"],
+        // "children": ["sanvika"],
+        "children": ["sanvika", "sandy"],
         "siblings": ["sudarshan", 'sudaabi'], //TODO: remove siblings
         "father": "soundara pandian",
         "mother": "thulasirani"
@@ -353,99 +353,128 @@ function getChildCount(name, count = 1) {
 function getDomTree(name, rootId) {
     const person = getPerson(name);
     //TODO: going local culture now as spouse required to check children contrary to modern culture
-    const id = (person.fname + person.lname) + "-" + getInitial(person);
-    const htmlWidth = document.documentElement.offsetWidth;
-    const rootSvgEl = `<svg id="root-svg" xmlns="${xmlns}" version="${version}" width="${htmlWidth}">`;
-    const parentId = document.getElementById(rootId);
-    parentId.innerHTML = rootSvgEl;
+    const personId = (person.fname + person.lname) + "-" + getInitial(person);
+    const screenWidth = document.documentElement.offsetWidth;
+    const rootSvgEl = `<svg id="${rootSvgId}" xmlns="${xmlns}" version="${version}" width="${screenWidth}" height="${screenWidth}" />`;
+    const rootEl = document.getElementById(rootId);
+    rootEl.innerHTML = rootSvgEl;
     if (person.spouse) {
-        createForeignText([person.name, person.spouse], rootSvgId, { id });
-        const parentOneId = document.getElementById(id);
-        const p1Dimension = parentOneId.getClientRects()[0];
-        const x = (htmlWidth - p1Dimension.width) / 2;
-        setAttributesNs(parentOneId, { x });
+        createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: 0, y: 0 });
+        const parentOneEl = document.getElementById(personId);
+        const p1Dimension = parentOneEl.getClientRects()[0];
+        const parentWidth = p1Dimension.width;
+        const parentHeight = p1Dimension.height;
+        const lX2 = (screenWidth / 2);
+        const parentX = lX2 - p1Dimension.width / 2;
+        const parentY = 0;//default
+        setAttributesNs(parentOneEl, { x: parentX, y: parentY });
+
         const cL = person.childCount;
+
+        //if parent has child 
         if (cL) {
-            const hTotalW = person.treeWeight * foreignWidth;
-            const quarter = (hTotalW) / 4;
-            const hMidPt = (hTotalW) / 2;
-            const hWidthLimit = htmlWidth * middleRatio;
+            const hTotalW = person.treeWeight * parentWidth;
+            const quarter = (parentWidth) / 4;
+            const hMidPt = (parentWidth) / 2;
+            const hWidthLimit = screenWidth * middleRatio;
             if (hTotalW > hWidthLimit) {
                 const newHtmlWidth = hTotalW / middleRatio;
-                const rootEl = document.getElementById("root-svg");
-                setAttributesNs(rootEl, { width: newHtmlWidth });
-                const newX = (newHtmlWidth - p1Dimension.width) / 2;
+                const svgEl = document.getElementById("root-svg");
+                setAttributesNs(svgEl, { width: newHtmlWidth });
+                const newX = (newHtmlWidth - parentWidth) / 2;
                 setAttributesNs(parentOneId, { x: newX });
             } else {
-                if (cL > 1) {
+                //first path 
+                const fMx1 = parentX + quarter;
+                const fMy1 = parentY + parentHeight;
+                const fLx2 = parentX + hMidPt;
+                const fLy2 = parentY + parentHeight + hMidPt;
 
-                } else {
-                    //from quarter one
-                    createPath("root-svg", { d: `M ${quarter + x}  ${textHeight} L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
-                    //from quarter two
-                    createPath("root-svg", { d: `M ${quarter * 3 + x}  ${textHeight} L ${hMidPt + x} ${hMidPt}`, stroke: `${strOrange}` })
-                    //middle line
-                    createPath("root-svg", { d: `M ${hMidPt + x} ${hMidPt} L ${hMidPt + x} ${hMidPt + hMidPt}`, stroke: `${strOrange}` });
-                    //single child
-                    createForeignText(['sanvika'], rootSvgId, { id: 'sanvika-v' });
-                }
+                //second path
+                const sMx1 = parentX + (quarter * 3);
+                const sMy1 = fMy1;
+                const sLx2 = fLx2;
+                const sLy2 = fLy2;
+
+                //horizontal path
+                const hMx1 = sLx2 - (hTotalW / 2) * Math.min(1, cL - 1);
+                const hMy1 = sLy2;
+                const hLx2 = sLx2 + (hTotalW / 2) * Math.min(1, cL - 1);
+                const hLy2 = sLy2;
+
+                //from quarter one
+                createPath(rootSvgId, { d: `M ${fMx1}  ${fMy1} L ${fLx2} ${fLy2}`, stroke: `${strOrange}` })
+                //from quarter two
+                createPath(rootSvgId, { d: `M ${sMx1}  ${sMy1} L ${sLx2} ${sLy2}`, stroke: `${strOrange}` })
+                //horizontal line
+                createPath(rootSvgId, { d: `M ${hMx1} ${hMy1} L ${hLx2} ${hLy2}`, stroke: `${strOrange}` });
+
+                person.children.forEach((child, i) => {
+                    generateChildTree(child, i, { parentX, parentY, parentHeight, parentWidth, quarter, hMidPt, hTotalW, cL });
+                })
+
             }
         }
-
-        // createText(personName, `root-svg-${id}`, { id: parentOneId, x: hStartPt, y: ((extraParams.vPathHeight + extraParams.hMidPt) * (extraParams.step)) + extraParams.vPathHeight + textHeight });
-
-        // const p1 = document.createElement('div');
-
-        // setAttributes(p1, { id });
-        // const spanList = getSpanList(nameCapitalized(person.name), nameCapitalized(person.spouse));
-        // p1.appendChild(spanList);
-
-
-        if (false && person.childCount) {
-
-            // const childCount = person.children.map(t => getChildCount(t)).reduce((acc, curr) => acc + curr);
-
-            const treeWeight = person.treeWeight / 2;
-            const cL = person.childCount;
-            const currentParentID = document.getElementById(id);
-            const parentWidth = Object.values(currentParentID.children).reduce((acc, curr) => acc + curr.offsetWidth, 0);
-            const hTotalW = parentWidth;
-            const quarter = (hTotalW) / 4;
-            const hMidPt = (hTotalW) / 2;
-
-
-            const hPathWidth = hTotalW * treeWeight;
-
-            const bodyWidth = document.documentElement.offsetWidth;
-            const hStartPt = cL > 1 ? (bodyWidth - hPathWidth) / 2 : ((bodyWidth - hTotalW) / 2) + hMidPt;
-
-            const svgElOne = `<svg id="svg1-${id}" xmlns="${xmlns}" version="${version}" viewBox="0 0 ${hTotalW} ${hMidPt}" width="${hTotalW}" height="${hMidPt}"
-      preserveAspectRatio="${preserveAspectRatio}">
-      <path d="M ${quarter} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/> 
-      <path d="M ${quarter * 3} 0 L ${hMidPt} ${hMidPt}" stroke="${strOrange}" stroke-width="${strWidth}"/>
-      `;
-
-            const svgElTwo = `<svg id="svg2-${id}" xmlns="${xmlns}" version="${version}" width="100%" height="100vh"
-      preserveAspectRatio="${preserveAspectRatio}">
-      ${cL > 1 ? `<path d="M ${hStartPt} ${strWidth} H ${(hPathWidth) + hStartPt}" stroke="${strGreen}" stroke-width="${strWidth}" /> ` : ""}
-      `;
-            //first horizontal path
-            currentParentID.innerHTML += svgElOne;
-            currentParentID.innerHTML += svgElTwo;
-
-            person.children.forEach((t, i) => {
-                drawSvg(t, i, `svg2-${id}`, { hPathWidth, vPathHeight: hMidPt, hMidPt: 0, cL, hStartPt, vPathY: 0, step: 0 });
-            })
-        } else {
-            //TODO:he/she is waiting hehe
-            //newly married/waiting for child for long according with marriage date
-        }
     } else {
-        createForeignText(person.name, rootSvgId, { id});
-        const parentOneId = document.getElementById(id);
-        const p1Dimension = parentOneId.getClientRects()[0];
-        const x = (htmlWidth - p1Dimension.width) / 2;
-        setAttributesNs(parentOneId, { x });
+        createForeignText([person.name], rootSvgId, { id: personId, x: 0, y: 0 });
+        const parentOneEl = document.getElementById(personId);
+        const p1Dimension = parentOneEl.getClientRects()[0];
+        const lX2 = (screenWidth / 2);
+        const x = lX2 - p1Dimension.width / 2;
+        const y = 0;
+        setAttributesNs(parentOneEl, { x, y });
+    }
+}
+
+function generateChildTree(name, i, attrs) {
+
+    const person = getPerson(name);
+    //TODO: going local culture now as spouse required to check children contrary to modern culture
+    const personId = (person.fname + person.lname) + "-" + getInitial(person);
+
+    const { parentX, parentY, parentHeight, quarter, hMidPt, hTotalW, cL, parentWidth } = attrs;
+
+    //first path 
+    const fMx1 = parentX + quarter;
+    const fMy1 = parentY + parentHeight;
+    const fLx2 = parentX + hMidPt;
+    const fLy2 = parentY + parentHeight + hMidPt;
+
+    //second path
+    const sMx1 = parentX + (quarter * 3);
+    const sMy1 = fMy1;
+    const sLx2 = fLx2;
+    const sLy2 = fLy2;
+
+    //horizontal path
+    const hMx1 = sLx2 - (hTotalW / 2) * Math.min(1, cL - 1);
+    const hMy1 = sLy2;
+    const hLx2 = sLx2 + (hTotalW / 2) * Math.min(1, cL - 1);
+    const hLy2 = sLy2;
+
+    //lines above child
+    const lMx1 = hMx1 + (i && (hTotalW / (cL - 1)) * i);
+    const lMy1 = hLy2;
+    const lLx2 = hMx1 + (i && (hTotalW / (cL - 1)) * i);
+    const lLy2 = hLy2 + hMidPt;
+
+    // //from quarter one
+    // createPath(rootSvgId, { d: `M ${fMx1}  ${fMy1} L ${fLx2} ${fLy2}`, stroke: `${strOrange}` })
+    // //from quarter two
+    // createPath(rootSvgId, { d: `M ${sMx1}  ${sMy1} L ${sLx2} ${sLy2}`, stroke: `${strOrange}` })
+    // //horizontal line
+    // createPath(rootSvgId, { d: `M ${hMx1} ${hMy1} L ${hLx2} ${hLy2}`, stroke: `${strOrange}` });
+    //above line
+    createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
+
+    if (person.spouse) {
+        // const newParentX = lLx2 - (parentWidth / 2);
+        // const newParentY = lLy2;
+        // createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: newParentX, y: newParentY });
+    } else {
+        const newParentX = lLx2 - (textWidth / 2);
+        const newParentY = lLy2;
+        createForeignText([name], rootSvgId, { id: personId, x: newParentX, y: newParentY });
     }
 }
 
@@ -540,6 +569,7 @@ newJson.setChildCount();
 // getDomTree("mani", 'tree-structure');
 getDomTree("abinaya", 'tree-structure');
 // getDomTree("sudaabi", 'tree-structure');
+// getDomTree("sanvika", 'tree-structure');
 
 
 function handleSearch(e) {

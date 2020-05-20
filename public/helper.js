@@ -52,13 +52,14 @@ function createText(value, rootTag, attrs) {
   id.appendChild(textElement);
 }
 
-function createForeignText(value, rootTag, attrs) {
-  const id = document.getElementById(rootTag);
+function createForeignText(value, rootId, attrs) {
+  const { id, x, y } = attrs;
+  const rootEl = document.getElementById(rootId);
   const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
   const divFragment = getDivList(...value);
-  setAttributesNs(foreignObjEl, { id: attrs.id, width: (value.length * textWidth) + 5, height: textHeight });
+  setAttributesNs(foreignObjEl, { id, width: (value.length * textWidth), height: textHeight, x, y });
   foreignObjEl.appendChild(divFragment);
-  id.appendChild(foreignObjEl);
+  rootEl.appendChild(foreignObjEl);
 }
 
 function createParentForeignText(person, rootTag, attrs) {
