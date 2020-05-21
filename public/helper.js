@@ -43,6 +43,10 @@ function setAttributes(el, attrs) {
   Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
 }
 
+function getTextWidth(n=2) {
+  return n*textWidth;
+}
+
 function createText(value, rootTag, attrs) {
   const id = document.getElementById(rootTag);
   const textElement = document.createElementNS(xmlns, 'text');
@@ -57,7 +61,7 @@ function createForeignText(value, rootId, attrs) {
   const rootEl = document.getElementById(rootId);
   const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
   const divFragment = getDivList(...value);
-  setAttributesNs(foreignObjEl, { id, width: (value.length * textWidth), height: textHeight, x, y });
+  setAttributesNs(foreignObjEl, { id, width: getTextWidth(value.length), height: textHeight, x, y });
   foreignObjEl.appendChild(divFragment);
   rootEl.appendChild(foreignObjEl);
 }

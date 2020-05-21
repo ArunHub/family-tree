@@ -55,7 +55,7 @@ const sample = [
         "gender": "F",
         "_age": 28,
         "spouse": "vijay prabhu",
-        // "children": ["sanvika"],
+        "children": ["sanvika"],
         "children": ["sanvika", "sandy"],
         "siblings": ["sudarshan", 'sudaabi'], //TODO: remove siblings
         "father": "soundara pandian",
@@ -352,19 +352,35 @@ function getChildCount(name, count = 1) {
 
 function getDomTree(name, rootId) {
     const person = getPerson(name);
-    //TODO: going local culture now as spouse required to check children contrary to modern culture
-    const personId = (person.fname + person.lname) + "-" + getInitial(person);
     const screenWidth = document.documentElement.offsetWidth;
     const rootSvgEl = `<svg id="${rootSvgId}" xmlns="${xmlns}" version="${version}" width="${screenWidth}" height="${screenWidth}" />`;
     const rootEl = document.getElementById(rootId);
     rootEl.innerHTML = rootSvgEl;
-    if (person.spouse) {
+
+    const parentWidth = person.spouse ? getTextWidth() : getTextWidth(1);
+
+    //determine if total horizontal is greater than horizontal width limit
+    const hTotalW = person.treeWeight * parentWidth;
+    const hWidthLimit = screenWidth * middleRatio;
+    if (hTotalW > hWidthLimit) {
+        const newHtmlWidth = hTotalW / middleRatio;
+        const svgEl = document.getElementById(rootSvgEl);
+        setAttributesNs(svgEl, { width: newHtmlWidth });
+        const newX = (newHtmlWidth - parentWidth) / 2;
+        setAttributesNs(parentOneId, { x: newX });
+    }
+
+    const lX2 = (screenWidth / 2);
+    const lY2 = 0;
+
+    generateTree(person, 0, lX2, lY2, hTotalW, 0);
+
+    if (false && person.spouse) {
         createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: 0, y: 0 });
         const parentOneEl = document.getElementById(personId);
         const p1Dimension = parentOneEl.getClientRects()[0];
         const parentWidth = p1Dimension.width;
         const parentHeight = p1Dimension.height;
-        const lX2 = (screenWidth / 2);
         const parentX = lX2 - p1Dimension.width / 2;
         const parentY = 0;//default
         setAttributesNs(parentOneEl, { x: parentX, y: parentY });
@@ -373,16 +389,10 @@ function getDomTree(name, rootId) {
 
         //if parent has child 
         if (cL) {
-            const hTotalW = person.treeWeight * parentWidth;
             const quarter = (parentWidth) / 4;
             const hMidPt = (parentWidth) / 2;
-            const hWidthLimit = screenWidth * middleRatio;
-            if (hTotalW > hWidthLimit) {
-                const newHtmlWidth = hTotalW / middleRatio;
-                const svgEl = document.getElementById("root-svg");
-                setAttributesNs(svgEl, { width: newHtmlWidth });
-                const newX = (newHtmlWidth - parentWidth) / 2;
-                setAttributesNs(parentOneId, { x: newX });
+            if (false) {
+
             } else {
                 //first path 
                 const fMx1 = parentX + quarter;
@@ -416,13 +426,83 @@ function getDomTree(name, rootId) {
             }
         }
     } else {
-        createForeignText([person.name], rootSvgId, { id: personId, x: 0, y: 0 });
-        const parentOneEl = document.getElementById(personId);
-        const p1Dimension = parentOneEl.getClientRects()[0];
-        const lX2 = (screenWidth / 2);
-        const x = lX2 - p1Dimension.width / 2;
-        const y = 0;
-        setAttributesNs(parentOneEl, { x, y });
+        // createForeignText([person.name], rootSvgId, { id: personId, x: 0, y: 0 });
+        // const parentOneEl = document.getElementById(personId);
+        // const p1Dimension = parentOneEl.getClientRects()[0];
+        // const lX2 = (screenWidth / 2);
+        // const x = lX2 - p1Dimension.width / 2;
+        // const y = 0;
+        // setAttributesNs(parentOneEl, { x, y });
+    }
+}
+
+function generateTree(person, i, lX2, lY2, hTotalW, hMidPt) {
+    //TODO: going local culture now as spouse required to check children contrary to modern culture
+    const personId = (person.fname + person.lname) + "-" + getInitial(person);
+
+    const cL = person.childCount;
+
+    const hMx1 = lX2 - (hTotalW / 2) * Math.min(1, cL - 1);
+    const hLy2 = lY2;
+    //lines above child
+    const lMx1 = hMx1 + (i && (hTotalW / (cL - 1)) * i); // getting -1 here so line is getting drawn reversely
+    const lMy1 = hLy2;
+    const lLx2 = hMx1 + (i && (hTotalW / (cL - 1)) * i);
+    const lLy2 = hLy2 + hMidPt;
+
+
+    if (person.spouse) {
+        const parentWidth = getTextWidth();
+        const quarter = parentWidth / 4;
+        const newHmidPt = parentWidth / 2;
+        const parentHeight = textHeight;
+        const parentX = lX2 - newHmidPt;
+        const parentY = lY2;
+
+        createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
+        createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: parentX, y: parentY });
+
+        if (cL) {
+            //first path 
+            const fMx1 = parentX + quarter;
+            const fMy1 = parentY + parentHeight;
+            const fLx2 = parentX + newHmidPt;
+            const fLy2 = parentY + parentHeight + newHmidPt;
+
+            //second path
+            const sMx1 = parentX + (quarter * 3);
+            const sMy1 = fMy1;
+            const sLx2 = fLx2;
+            const sLy2 = fLy2;
+
+            //horizontal path
+            const newHMx1 = sLx2 - (hTotalW / 2) * Math.min(1, cL - 1);
+            const hMy1 = sLy2;
+            const hLx2 = sLx2 + (hTotalW / 2) * Math.min(1, cL - 1);
+            const hLy2 = sLy2;
+
+            // //from quarter one
+            createPath(rootSvgId, { d: `M ${fMx1}  ${fMy1} L ${fLx2} ${fLy2}`, stroke: `${strOrange}` })
+            // //from quarter two
+            createPath(rootSvgId, { d: `M ${sMx1}  ${sMy1} L ${sLx2} ${sLy2}`, stroke: `${strOrange}` })
+            // //horizontal line
+            createPath(rootSvgId, { d: `M ${newHMx1} ${hMy1} L ${hLx2} ${hLy2}`, stroke: `${strOrange}` });
+
+            person.children.forEach((child, i) => {
+                const nextPerson = getPerson(child);
+                // const parentWidth = nextPerson.spouse ? getTextWidth() : getTextWidth(1);
+
+                const newHTotalW = cL > 1 ? person.treeWeight * parentWidth : 0;
+                generateTree(nextPerson, i, sLx2, sLy2, newHTotalW, newHmidPt);
+            })
+        }
+
+    } else {
+        const parentWidth = getTextWidth(1);
+        const parentX = lLx2 - parentWidth / 2;
+        const parentY = lLy2;
+        createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
+        createForeignText([person.name], rootSvgId, { id: personId, x: parentX, y: parentY });
     }
 }
 

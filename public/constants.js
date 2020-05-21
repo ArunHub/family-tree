@@ -20,7 +20,7 @@ const strWidth = 2;
 const mL = 10; //margin-left
 const middleRatio = 0.75;
 const textWidth = 80;
-const foreignWidth = 2 * textWidth + (5);
+const foreignWidth = 2 * textWidth;
 const textHeight = 20;
 
 const xmlns = "http://www.w3.org/2000/svg";
