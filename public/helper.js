@@ -20,7 +20,7 @@ function getImage(gender) {
   }
 };
 
-function getTreeWeight(count) {
+function getTreeWeight(count) {//till parent didnt have child then treeweight is 0
   return Math.max(2, count) - 2;
 }
 

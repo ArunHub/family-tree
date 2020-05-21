@@ -56,7 +56,7 @@ const sample = [
         "_age": 28,
         "spouse": "vijay prabhu",
         "children": ["sanvika"],
-        "children": ["sanvika", "sandy"],
+        // "children": ["sanvika", "sandy"],    
         "siblings": ["sudarshan", 'sudaabi'], //TODO: remove siblings
         "father": "soundara pandian",
         "mother": "thulasirani"
@@ -80,7 +80,7 @@ const sample = [
         "_age": 54,
         "spouse": "sundari",
         "children": ["arun kumar", "preethi"],
-        // "children": ["arun kumar", "preethi",'sanvika','sandy','rajavel','rashika'],
+        "children": ["arun kumar", "preethi",'sanvika','sandy','rajavel','rashika'],
         "siblings": ["soundara pandian", "selva kumar"],
         "father": "iyyam perumal",
         "mother": "thangammal"
@@ -362,18 +362,20 @@ function getDomTree(name, rootId) {
     //determine if total horizontal is greater than horizontal width limit
     const hTotalW = person.treeWeight * parentWidth;
     const hWidthLimit = screenWidth * middleRatio;
+    const newHtmlWidth = hTotalW / middleRatio;
     if (hTotalW > hWidthLimit) {
-        const newHtmlWidth = hTotalW / middleRatio;
-        const svgEl = document.getElementById(rootSvgEl);
+        const svgEl = document.getElementById(rootSvgId);
         setAttributesNs(svgEl, { width: newHtmlWidth });
-        const newX = (newHtmlWidth - parentWidth) / 2;
-        setAttributesNs(parentOneId, { x: newX });
+        // const newX = (newHtmlWidth - parentWidth) / 2;
+        // setAttributesNs(parentOneId, { x: newX });
     }
 
-    const lX2 = (screenWidth / 2);
+    const lX2 = (newHtmlWidth / 2);
     const lY2 = 0;
+    const hiddenParentWidth = 0;
+    const hMidPt = hiddenParentWidth/2;
 
-    generateTree(person, 0, lX2, lY2, hTotalW, 0);
+    generateTree(person, 0, lX2, lY2, hTotalW, hMidPt, 1);
 
     if (false && person.spouse) {
         createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: 0, y: 0 });
@@ -436,11 +438,9 @@ function getDomTree(name, rootId) {
     }
 }
 
-function generateTree(person, i, lX2, lY2, hTotalW, hMidPt) {
+function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
     //TODO: going local culture now as spouse required to check children contrary to modern culture
     const personId = (person.fname + person.lname) + "-" + getInitial(person);
-
-    const cL = person.childCount;
 
     const hMx1 = lX2 - (hTotalW / 2) * Math.min(1, cL - 1);
     const hLy2 = lY2;
@@ -450,19 +450,20 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt) {
     const lLx2 = hMx1 + (i && (hTotalW / (cL - 1)) * i);
     const lLy2 = hLy2 + hMidPt;
 
-
     if (person.spouse) {
         const parentWidth = getTextWidth();
         const quarter = parentWidth / 4;
         const newHmidPt = parentWidth / 2;
         const parentHeight = textHeight;
-        const parentX = lX2 - newHmidPt;
-        const parentY = lY2;
+        const parentX = lLx2 - newHmidPt;
+        const parentY = lLy2;
+        const newCL = person.childCount;
+        const newHTotalW = person.treeWeight * parentWidth;
 
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
         createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: parentX, y: parentY });
 
-        if (cL) {
+        if (newCL) {
             //first path 
             const fMx1 = parentX + quarter;
             const fMy1 = parentY + parentHeight;
@@ -472,28 +473,28 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt) {
             //second path
             const sMx1 = parentX + (quarter * 3);
             const sMy1 = fMy1;
-            const sLx2 = fLx2;
-            const sLy2 = fLy2;
+            const sLx2 = fLx2; //new x2
+            const sLy2 = fLy2; //new y2
 
             //horizontal path
-            const newHMx1 = sLx2 - (hTotalW / 2) * Math.min(1, cL - 1);
+            const newHMx1 = sLx2 - (newHTotalW / 2) * Math.min(1, newCL - 1);
             const hMy1 = sLy2;
-            const hLx2 = sLx2 + (hTotalW / 2) * Math.min(1, cL - 1);
-            const hLy2 = sLy2;
+            const hLx2 = sLx2 + (newHTotalW / 2) * Math.min(1, newCL - 1);
+            const newHLy2 = sLy2;
 
             // //from quarter one
             createPath(rootSvgId, { d: `M ${fMx1}  ${fMy1} L ${fLx2} ${fLy2}`, stroke: `${strOrange}` })
             // //from quarter two
             createPath(rootSvgId, { d: `M ${sMx1}  ${sMy1} L ${sLx2} ${sLy2}`, stroke: `${strOrange}` })
             // //horizontal line
-            createPath(rootSvgId, { d: `M ${newHMx1} ${hMy1} L ${hLx2} ${hLy2}`, stroke: `${strOrange}` });
+            createPath(rootSvgId, { d: `M ${newHMx1} ${hMy1} L ${hLx2} ${newHLy2}`, stroke: `${strOrange}` });
 
-            person.children.forEach((child, i) => {
+            person.children.forEach((child, idx) => {
                 const nextPerson = getPerson(child);
                 // const parentWidth = nextPerson.spouse ? getTextWidth() : getTextWidth(1);
 
-                const newHTotalW = cL > 1 ? person.treeWeight * parentWidth : 0;
-                generateTree(nextPerson, i, sLx2, sLy2, newHTotalW, newHmidPt);
+                const newHTotalW = person.treeWeight * parentWidth;
+                generateTree(nextPerson, idx, sLx2, sLy2, newHTotalW, newHmidPt, newCL);
             })
         }
 
@@ -644,10 +645,10 @@ pickName.addEventListener('submit', e => handleSearch(e));
 
 const newJson = new Tree(sample);
 newJson.setChildCount();
-// getDomTree("iyyam perumal", 'tree-structure');
+getDomTree("iyyam perumal", 'tree-structure');
 // getDomTree("soundara pandian", 'tree-structure');
 // getDomTree("mani", 'tree-structure');
-getDomTree("abinaya", 'tree-structure');
+// getDomTree("abinaya", 'tree-structure');
 // getDomTree("sudaabi", 'tree-structure');
 // getDomTree("sanvika", 'tree-structure');
 
