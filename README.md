@@ -9,6 +9,11 @@ Just to learn SVG, i had developed this family tree structure using my family de
 
 
 ### How to use?
+
+Download or clone the setup, then open command prompt in the folder and type
+> node server.js
+> open chrome browser and type localhost:3000 in address bar to run it
+
 **Still under construction**
 
 After achieving the generic purpose of ,
