@@ -7,8 +7,8 @@ const sample = [
         "gender": "M",
         "_age": 68,
         "lifeSpan": { bornOn: "01-01-1940" },
-        // "children": ["poongudi", "soundara pandian", "mani", "selva kumar"],
-        "children": ["soundara pandian", "mani", "selva kumar"],
+        "children": ["poongudi", "soundara pandian", "mani", "selva kumar"],
+        // "children": ["soundara pandian", "mani", "selva kumar"],
         "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE },
         "father": "iyyam perumal",
         "mother": "thangammal"
@@ -125,9 +125,21 @@ const sample = [
         "lname": "",
         "gender": "M",
         "isParent": true,
-        "spouse": "",
+        "spouse": "laila",
+        "children": ["sandy"],
         "_age": 31,
         "siblings": ['abinaya', 'sudaabi'],
+        "father": "soundara pandian",
+        "mother": "thulasirani"
+    },
+    {
+        "fname": "laila",
+        "lname": "",
+        "gender": "F",
+        "isParent": true,
+        "spouse": "sudarshan",
+        "children": ["sandy"],
+        "_age": 31,
         "father": "soundara pandian",
         "mother": "thulasirani"
     },
@@ -341,7 +353,7 @@ function getChildCount(name, count = 1) {
     const person = getPerson(name);
     let num = count;
     if (person.spouse) {
-        num++;
+        // num++;
         if (person.childCount) {
             num = num + person.childCount;
             person.children.forEach((t) => num = getChildCount(t, num));
@@ -362,9 +374,9 @@ function getDomTree(name, rootId) {
     //determine if total horizontal is greater than horizontal width limit
     const hTotalW = person.treeWeight * parentWidth;
     const hWidthLimit = screenWidth * middleRatio;
-    const newHtmlWidth = hTotalW / middleRatio;
+    const newHtmlWidth = Number.parseFloat((hTotalW / middleRatio).toFixed(2));
     let lX2 = (screenWidth / 2);
-    if (hTotalW > hWidthLimit) {
+    if (hTotalW >= hWidthLimit) {
         const svgEl = document.getElementById(rootSvgId);
         setAttributesNs(svgEl, { width: newHtmlWidth });
         lX2 = (newHtmlWidth / 2);
@@ -384,9 +396,9 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
     const hMx1 = lX2 - (hTotalW / 2) * Math.min(1, cL - 1);
     const hLy2 = lY2;
     //lines above child
-    const lMx1 = hMx1 + (i && (hTotalW / (cL - 1)) * i); // getting -1 here so line is getting drawn reversely
+    const lMx1 = Number.parseFloat((hMx1 + (i && (hTotalW / (cL - 1)) * i)).toFixed(2)); // getting -1 here so line is getting drawn reversely
     const lMy1 = hLy2;
-    const lLx2 = hMx1 + (i && (hTotalW / (cL - 1)) * i);
+    const lLx2 = Number.parseFloat((hMx1 + (i && (hTotalW / (cL - 1)) * i)).toFixed(2));
     const lLy2 = hLy2 + hMidPt;
 
     if (person.spouse) {
@@ -394,7 +406,7 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const quarter = parentWidth / 4;
         const newHmidPt = parentWidth / 2;
         const parentHeight = textHeight;
-        const parentX = lLx2 - newHmidPt;
+        const parentX = Number.parseFloat((lLx2 - newHmidPt).toFixed(2));
         const parentY = lLy2;
         const newCL = person.childCount;
         const newHTotalW = person.treeWeight * parentWidth;
@@ -404,21 +416,21 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
 
         if (newCL) {
             //first path 
-            const fMx1 = parentX + quarter;
+            const fMx1 = Number.parseFloat((parentX + quarter).toFixed(2));
             const fMy1 = parentY + parentHeight;
-            const fLx2 = parentX + newHmidPt;
+            const fLx2 = Number.parseFloat((parentX + newHmidPt).toFixed(2));
             const fLy2 = parentY + parentHeight + newHmidPt;
 
             //second path
-            const sMx1 = parentX + (quarter * 3);
+            const sMx1 = Number.parseFloat((parentX + (quarter * 3)).toFixed(2));
             const sMy1 = fMy1;
             const sLx2 = fLx2; //new x2
             const sLy2 = fLy2; //new y2
 
             //horizontal path
-            const newHMx1 = sLx2 - (newHTotalW / 2) * Math.min(1, newCL - 1);
+            const newHMx1 = Number.parseFloat((sLx2 - (newHTotalW / 2) * Math.min(1, newCL - 1)).toFixed(2));
             const hMy1 = sLy2;
-            const hLx2 = sLx2 + (newHTotalW / 2) * Math.min(1, newCL - 1);
+            const hLx2 = Number.parseFloat((sLx2 + (newHTotalW / 2) * Math.min(1, newCL - 1)).toFixed(2));
             const newHLy2 = sLy2;
 
             // //from quarter one
@@ -436,7 +448,7 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         }
     } else {
         const parentWidth = getTextWidth(1);
-        const parentX = lLx2 - parentWidth / 2;
+        const parentX = Number.parseFloat((lLx2 - parentWidth / 2).toFixed(2));
         const parentY = lLy2;
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
         createForeignText([person.name], rootSvgId, { id: personId, x: parentX, y: parentY });
