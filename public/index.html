@@ -11,8 +11,10 @@
 
 <body>
   <div id="root">
-    <form id="pick-name" style="display: none">
-      <input type="text" value="iyyamperumal" placeholder="Grandfather/father" name="root-name" id="root-name" />
+    <form id="submit-form" style="display: block">
+      <input type="text" name="name" id="name_input" list="search_list">Name
+      <datalist id="search_list"></datalist>
+      <!-- <input type="text" value="iyyamperumal" placeholder="Grandfather/father" name="root-name" id="root-name" /> -->
       <input type="submit" value="search" />
     </form>
     <div id="tree-structure" class="tree-structure"></div>

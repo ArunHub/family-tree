@@ -6,12 +6,12 @@ const sample = [
         "marital_status": MARITAL_STATUS.MARRIED,
         "gender": "M",
         "_age": 68,
-        "lifeSpan": { bornOn: "01-01-1940" },
+        "life_span": { bornOn: "01-01-1940", diedOn: "14-12-1996" },
         "children": ["poongudi", "soundara pandian", "mani", "selva kumar"],
         // "children": ["soundara pandian", "mani", "selva kumar"],
         "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE },
-        "father": "iyyam perumal",
-        "mother": "thangammal"
+        "father": "",
+        "mother": ""
     },
     {
         "fname": "thangammal",
@@ -20,11 +20,11 @@ const sample = [
         "marital_status": MARITAL_STATUS.MARRIED,
         "gender": "F",
         "_age": 68,
-        "lifeSpan": { bornOn: "01-01-1940" },
+        "life_span": { bornOn: "01-01-1940", diedOn: "22-06-2008" },
         "children": ["soundara pandian", "mani", "selva kumar"],
         "anniversary": { type: ANNIVERSARY_TYPE.MARRIAGE },
-        "father": "iyyam perumal",
-        "mother": "thangammal"
+        "father": "",
+        "mother": ""
     },
     {
         "fname": "soundara",
@@ -36,7 +36,8 @@ const sample = [
         // "children": ["abinaya"],
         "siblings": ["mani", "selva kumar"],
         "father": "iyyam perumal",
-        "mother": "thangammal"
+        "mother": "thangammal",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "thulasirani",
@@ -47,7 +48,8 @@ const sample = [
         "children": ["sudarshan", "abinaya", 'sudaabi'],
         "siblings": ["mani", "selva kumar"],
         "father": "", //TODO
-        "mother": ""
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "abinaya",
@@ -59,7 +61,8 @@ const sample = [
         // "children": ["sanvika", "sandy"],    
         "siblings": ["sudarshan", 'sudaabi'], //TODO: remove siblings
         "father": "soundara pandian",
-        "mother": "thulasirani"
+        "mother": "thulasirani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "vijay",
@@ -70,8 +73,9 @@ const sample = [
         "_age": 31,
         "children": ["sanvika"],
         "siblings": [],
-        "father": "prabhu", //TODO
-        "mother": "vijaya",
+        "father": "", //TODO
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "mani",
@@ -83,7 +87,8 @@ const sample = [
         // "children": ["arun kumar", "preethi", 'sanvika', 'sandy', 'rajavel', 'rashika'],
         "siblings": ["soundara pandian", "selva kumar"],
         "father": "iyyam perumal",
-        "mother": "thangammal"
+        "mother": "thangammal",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sundari",
@@ -92,8 +97,9 @@ const sample = [
         "_age": 54,
         "spouse": "mani",
         "children": ["arun kumar", "preethi"],
-        "father": "balsamy",
-        "mother": "acchi" //TODO
+        "father": "",
+        "mother": "", //TODO,
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "selva",
@@ -107,7 +113,8 @@ const sample = [
         // "children": ["rashika", "sham deepak"],
         "siblings": ["soundara pandian", "mani"],
         "father": "iyyam perumal",
-        "mother": "thangammal"
+        "mother": "thangammal",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "pushparani",
@@ -117,8 +124,9 @@ const sample = [
         "spouse": "selva kumar",
         // "spouse": "",
         "children": ["rashika", "sham deepak"],
-        "father": "srithath",//TODO
-        "mother": "sriamma"
+        "father": "",//TODO
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sudarshan",
@@ -130,7 +138,8 @@ const sample = [
         "_age": 31,
         "siblings": ['abinaya', 'sudaabi'],
         "father": "soundara pandian",
-        "mother": "thulasirani"
+        "mother": "thulasirani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "laila",
@@ -141,7 +150,8 @@ const sample = [
         "children": ["sandy"],
         "_age": 31,
         "father": "soundara pandian",
-        "mother": "thulasirani"
+        "mother": "thulasirani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sudaabi",
@@ -153,7 +163,8 @@ const sample = [
         "_age": 31,
         "siblings": ['abinaya', 'sudarshan'],
         "father": "soundara pandian",
-        "mother": "thulasirani"
+        "mother": "thulasirani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "vijaya",
@@ -164,8 +175,9 @@ const sample = [
         "_age": 31,
         "children": [],
         "siblings": [],
-        "father": "vijaya",
-        "mother": "vijaya",
+        "father": "",
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sanvika",
@@ -176,16 +188,19 @@ const sample = [
         "siblings": [],
         "father": "vijay prabhu",
         "mother": "abinaya",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "arun",
         "lname": "kumar",
         "gender": "M",
         "spouse": "",
+        "image": "arun.jpg",
         "_age": 31,
         "siblings": ['preethi'],
         "father": "mani",
         "mother": "sundari",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sham",
@@ -196,6 +211,7 @@ const sample = [
         "siblings": ['rashika'],
         "father": "selva kumar",
         "mother": "pushparani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "sandy",
@@ -206,6 +222,7 @@ const sample = [
         "siblings": ['rashika'],
         "father": "vijay prabhu",
         "mother": "abinaya",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "preethi",
@@ -217,6 +234,7 @@ const sample = [
         "siblings": ["arun kumar"],
         "father": "mani",
         "mother": "sundari",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "rashika",
@@ -228,6 +246,7 @@ const sample = [
         "siblings": ["sham deepak"],
         "father": "selva kumar",
         "mother": "pushparani",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "raja",
@@ -236,8 +255,9 @@ const sample = [
         "_age": 68,
         "spouse": "poongudi",
         "children": ["raja", "muthu"],
-        "father": "iyyam perumal",
-        "mother": "thangammal"
+        "father": "",
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "poongudi",
@@ -248,7 +268,8 @@ const sample = [
         "children": ["raja", "muthu"],
         "siblings": ["mani", "selva kumar"],
         "father": "iyyam perumal", //TODO
-        "mother": "thangammal"
+        "mother": "thangammal",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "raja",
@@ -258,7 +279,8 @@ const sample = [
         "spouse": "raji",
         "children": ["rajavel"],
         "father": "raja manickam",
-        "mother": "poongudi"
+        "mother": "poongudi",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "raji",
@@ -267,8 +289,9 @@ const sample = [
         "_age": 38,
         "spouse": "raja",
         "children": ["rajavel"],
-        "father": "iyyam perumal", //TODO
-        "mother": "thangammal"
+        "father": "", //TODO
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "rajavel",
@@ -278,7 +301,8 @@ const sample = [
         "spouse": "",
         "children": [],
         "father": "raja",
-        "mother": "raji"
+        "mother": "raji",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "muthu",
@@ -288,7 +312,8 @@ const sample = [
         "spouse": "akka",
         "children": [],
         "father": "raja manickam",
-        "mother": "poongudi"
+        "mother": "poongudi",
+        "life_span": { bornOn: "01-01-1940", }
     },
     {
         "fname": "akka",
@@ -297,8 +322,9 @@ const sample = [
         "_age": 38,
         "spouse": "muthu",
         "children": [],
-        "father": "raja manickam",
-        "mother": "poongudi"
+        "father": "",
+        "mother": "",
+        "life_span": { bornOn: "01-01-1940", }
     },
 ]
 
@@ -307,13 +333,13 @@ function Person(obj) {
     this.fname = obj.fname;
     this.lname = obj.lname;
     this.gender = obj.gender === "M" ? GENDER.M : GENDER.F;
-    this.image = getImage(obj.gender);
+    this.image = obj.image ? obj.image : "avatar.png";
     this.spouse = obj.spouse || "";
     this.children = obj.children || [];
     this.siblings = obj.siblings;
     this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE; //TODO
     this.profession = obj.profession //private
-    this.lifeSpan = obj.lifeSpan;
+    this.life_span = obj.life_span;
     this.childCount = this.children.length;
     this.father = obj.father;
     this.mother = obj.mother;
@@ -336,6 +362,13 @@ Tree.prototype.setTreeWeight = function (name, treeWeight) {
     this.data[name]['treeWeight'] = treeWeight;
 }
 
+// Tree.prototype.setSameTree = function (name) {
+//     const data = Object.assign({}, this.data);
+//     data[name]['isSameTree'] = true;
+//     this.data = data;
+//     console.log('this', this.data)
+// }
+
 function getJson(array) {
     let data = {};
     array.forEach(t => {
@@ -347,6 +380,40 @@ function getJson(array) {
 
 function getPerson(personName) {
     return newJson.data[personName];
+}
+
+function handleClick(person, e) {
+    if (nameCapitalized(person.name) === e.currentTarget.innerText) {
+        if (person.father) {
+            handleMouseleave();
+            removeSvgRoot();
+            getDomTree(person.father, 'tree-structure');
+        }
+    } else {
+        handleMouseleave();
+        removeSvgRoot();
+        getDomTree(person.spouse, 'tree-structure');
+    }
+}
+
+function getDivList(person) { //TODO: Modular pattern
+    const fragment = new DocumentFragment();
+    const nameList = person.spouse ? [person.name, person.spouse] : [person.name];
+    nameList.forEach(function (name) {
+        const currPerson = getPerson(name);
+        var divEl = document.createElement('div');
+        divEl.addEventListener('mouseenter', handleMouseenter.bind(this, currPerson), false);
+        divEl.addEventListener('mouseleave', handleMouseleave, false);
+        divEl.addEventListener('click', handleClick.bind(this, currPerson), false);
+        setAttributes(divEl, { class: "foreign-div" });
+        const nameCaps = nameCapitalized(name);
+        const imgClass = currPerson.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
+        divEl.innerHTML += `<img src="images/${currPerson.image}" alt="${nameCaps}" class="${imgClass}" />`;
+        divEl.innerHTML += `<div class="name">${nameCaps}</div>`;
+        fragment.appendChild(divEl);
+    })
+
+    return fragment;
 }
 
 function getChildCount(name, count = 1) {
@@ -392,7 +459,7 @@ function getDomTree(name, rootId) {
 function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
     //TODO: going local culture now as spouse required to check children contrary to modern culture
     const personId = (person.fname + person.lname) + "-" + getInitial(person);
-
+    // newJson.setSameTree(person.name);
     const hMx1 = lX2 - (hTotalW / 2) * Math.min(1, cL - 1);
     const hLy2 = lY2;
     //lines above child
@@ -412,7 +479,7 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const newHTotalW = person.treeWeight * parentWidth;
 
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
-        createForeignText([person.name, person.spouse], rootSvgId, { id: personId, x: parentX, y: parentY });
+        createForeignText(person, rootSvgId, { id: personId, x: parentX, y: parentY, getDivList });
 
         if (newCL) {
             //first path 
@@ -451,17 +518,12 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const parentX = Number.parseFloat((lLx2 - parentWidth / 2).toFixed(2));
         const parentY = lLy2;
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
-        createForeignText([person.name], rootSvgId, { id: personId, x: parentX, y: parentY });
+        createForeignText(person, rootSvgId, { id: personId, x: parentX, y: parentY, getDivList });
     }
 }
 
 const svg = document.getElementById('svg');
 const treeStructure = document.getElementById('tree-structure');
-const pickName = document.getElementById('pick-name');
-
-pickName.addEventListener('submit', e => handleSearch(e));
-
-
 
 const newJson = new Tree(sample);
 newJson.setChildCount();
@@ -472,11 +534,21 @@ getDomTree("iyyam perumal", 'tree-structure');
 // getDomTree("sudaabi", 'tree-structure');
 // getDomTree("sanvika", 'tree-structure');
 
-
+const search_name = document.getElementById('name_input');
+search_name.addEventListener('keyup', handleSearch, false);
 function handleSearch(e) {
+    const value = e.target.value;
+    const dataList = Object.values(newJson.data).filter(t => t.name.indexOf(value) !== -1);
+    const datalistEl = document.getElementById('search_list');
+    console.log('sdf', datalistEl);
+    datalistEl.innerHTML = "";
+    datalistEl.appendChild(getDataList(dataList));
+}
+
+const submitForm = document.getElementById('submit-form');
+submitForm.addEventListener('submit', handleSubmit, false);
+function handleSubmit(e) {
     e.preventDefault();
-    const rootName = document.getElementById('root-name');
-    const person = getPerson(rootName.value);
-    console.log('va', person)
+    console.log(e);
 
 }

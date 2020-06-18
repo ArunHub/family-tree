@@ -44,9 +44,30 @@ path{
   width:80px;
   display: inline-block;
   vertical-align: top;
+  padding: 0.05rem 0.15rem;
+  text-align: center;
+}
+
+.foreign-div > .name{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0.05rem 0.15rem;
+  /* border: 1px solid; */
+}
+
+.foreign-div >  img{
+    max-height: 100%;  
+    /* width: 50px; */
+    height: 50px;
+}
+
+.avatar-late{
+  filter: invert(50%);
+}
+
+.popup{
+  position: absolute;
   border: 1px solid;
+  padding: 0.25rem;
+  background: white;
 }

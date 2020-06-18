@@ -12,14 +12,6 @@ function getAnniversary(anniversary) {//birth, death, marriage, 60yrs
   }
 };
 
-function getImage(gender) {
-  if (gender === GENDER.M) {
-    return "ko";
-  } else {
-
-  }
-};
-
 function getTreeWeight(count) {//till parent didnt have child then treeweight is 0
   return Math.max(2, count) - 2;
 }
@@ -42,8 +34,8 @@ function setAttributes(el, attrs) {
   Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
 }
 
-function getTextWidth(n=2) {
-  return n*textWidth;
+function getTextWidth(n = 2) {
+  return n * textWidth;
 }
 
 function createText(value, rootTag, attrs) {
@@ -55,28 +47,36 @@ function createText(value, rootTag, attrs) {
   id.appendChild(textElement);
 }
 
-function createForeignText(value, rootId, attrs) {
-  const { id, x, y } = attrs;
-  const rootEl = document.getElementById(rootId);
-  const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-  const divFragment = getDivList(...value);
-  setAttributesNs(foreignObjEl, { id, width: getTextWidth(value.length), height: textHeight, x, y });
-  foreignObjEl.appendChild(divFragment);
-  rootEl.appendChild(foreignObjEl);
+function handleMouseenter(person, e) {
+  const parent = document.getElementById('root');
+  var divEl = document.createElement("div");
+  setAttributes(divEl, { id: "popup", class: "popup" });
+  divEl.style.left = e.clientX + "px";
+  divEl.style.top = e.clientY + "px";
+  const lifeSpan = person.life_span.hasOwnProperty('diedOn') ? `(${person.life_span.bornOn} - ${person.life_span.diedOn})` : "";
+  divEl.innerHTML += `<div>${e.target.innerText}</div><div>${lifeSpan}</div>`;
+  parent.prepend(divEl);
 }
 
-function getDivList() {
-  const fragment = new DocumentFragment();
+function handleMouseleave() {
+  const popup = document.getElementById('popup');
+  popup.parentNode.removeChild(popup);
+}
 
-  Object.values(arguments).forEach(function (name) {
-    var divEl = document.createElement('div');
-    setAttributes(divEl, { class: "foreign-div" });
-    const value = nameCapitalized(name);
-    divEl.innerHTML = value;
-    fragment.appendChild(divEl);
-  })
+function removeSvgRoot() {
+  const element = document.getElementById(rootSvgId);
+  element.parentNode.removeChild(element);
+}
 
-  return fragment;
+function createForeignText(person, rootId, attrs) {
+  const { id, x, y, getDivList } = attrs;
+  const rootEl = document.getElementById(rootId);
+  const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+  const nameList = person.spouse ? 2 : 1;
+  const divFragment = getDivList(person);
+  setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
+  foreignObjEl.appendChild(divFragment);
+  rootEl.appendChild(foreignObjEl);
 }
 
 function getSpanList() {
@@ -88,6 +88,18 @@ function getSpanList() {
     const name = nameCapitalized(value);
     span.innerHTML = name;
     fragment.appendChild(span)
+  })
+
+  return fragment;
+}
+
+function getDataList() {
+  const fragment = new DocumentFragment();
+
+  Object.values(arguments[0]).forEach(function (value) {
+    var option = document.createElement('option');
+    option.setAttribute('value', `${value.name}, son of ${value.father}`); //TODO: factory pattern
+    fragment.appendChild(option)
   })
 
   return fragment;

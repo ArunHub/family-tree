@@ -21,7 +21,7 @@ const mL = 10; //margin-left
 const middleRatio = 0.65;
 const textWidth = 80;
 const foreignWidth = 2 * textWidth;
-const textHeight = 20;
+const textHeight = 20 + 50; //50 for image dimension
 
 const xmlns = "http://www.w3.org/2000/svg";
 const preserveAspectRatio = "xMidYMid meet";
