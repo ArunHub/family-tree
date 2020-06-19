@@ -86,9 +86,9 @@ function getDataList() {
   const fragment = new DocumentFragment();
 
   Object.values(arguments[0]).forEach(function (value) {
-    var option = document.createElement('option');
-    option.setAttribute('value', `${value.name}, son of ${value.father}`);
-    fragment.appendChild(option)
+    var divEl = document.createElement('div');
+    divEl.innerText = `${value.name}, son of ${value.father}`;
+    fragment.appendChild(divEl);
   })
 
   return fragment;
@@ -126,58 +126,58 @@ function Person(obj) {
   this.treeWeight = 0;
 }
 
-Person.prototype.createForeignText = function (rootId, attrs) {
-  const { id, x, y } = attrs;
-  const rootEl = document.getElementById(rootId);
-  const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-  const nameList = this.person.spouse ? 2 : 1;
-  const divFragment = this.getDivList(this.person);
-  setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
-  foreignObjEl.appendChild(divFragment);
-  rootEl.appendChild(foreignObjEl);
-}
+// Person.prototype.createForeignText = function (rootId, attrs) {
+//   const { id, x, y } = attrs;
+//   const rootEl = document.getElementById(rootId);
+//   const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+//   const nameList = this.person.spouse ? 2 : 1;
+//   const divFragment = this.getDivList(this.person);
+//   setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
+//   foreignObjEl.appendChild(divFragment);
+//   rootEl.appendChild(foreignObjEl);
+// }
 
-Person.prototype.getDivList() = function () {
-  const fragment = new DocumentFragment();
-  const nameList = this.person.spouse ? [this.person.name, this.person.spouse] : [this.person.name];
-  nameList.forEach(function (name) {
-    const currPerson = getPerson(name);
-    var divEl = document.createElement('div');
-    divEl.addEventListener('mouseenter', this.handleMouseenter, false);
-    divEl.addEventListener('mouseleave', handleMouseleave, false);
-    divEl.addEventListener('click', this.handleClick, false);
-    setAttributes(divEl, { class: "foreign-div" });
-    const nameCaps = nameCapitalized(name);
-    const imgClass = currPerson.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
-    divEl.innerHTML += `<img src="images/${currPerson.image}" alt="${nameCaps}" class="${imgClass}" />`;
-    divEl.innerHTML += `<div class="name">${nameCaps}</div>`;
-    fragment.appendChild(divEl);
-  })
+// Person.prototype.getDivList() = function () {
+//   const fragment = new DocumentFragment();
+//   const nameList = this.person.spouse ? [this.person.name, this.person.spouse] : [this.person.name];
+//   nameList.forEach(function (name) {
+//     const currPerson = getPerson(name);
+//     var divEl = document.createElement('div');
+//     divEl.addEventListener('mouseenter', this.handleMouseenter, false);
+//     divEl.addEventListener('mouseleave', handleMouseleave, false);
+//     divEl.addEventListener('click', this.handleClick, false);
+//     setAttributes(divEl, { class: "foreign-div" });
+//     const nameCaps = nameCapitalized(name);
+//     const imgClass = currPerson.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
+//     divEl.innerHTML += `<img src="images/${currPerson.image}" alt="${nameCaps}" class="${imgClass}" />`;
+//     divEl.innerHTML += `<div class="name">${nameCaps}</div>`;
+//     fragment.appendChild(divEl);
+//   })
 
-  return fragment;
-}
+//   return fragment;
+// }
 
-Person.prototype.handleMouseenter = function (e) {
-  const parent = document.getElementById('root');
-  var divEl = document.createElement("div");
-  setAttributes(divEl, { id: "popup", class: "popup" });
-  divEl.style.left = e.clientX + "px";
-  divEl.style.top = e.clientY + "px";
-  const lifeSpan = this.person.life_span.hasOwnProperty('diedOn') ? `(${this.person.life_span.bornOn} - ${this.person.life_span.diedOn})` : "";
-  divEl.innerHTML += `<div>${e.target.innerText}</div><div>${lifeSpan}</div>`;
-  parent.prepend(divEl);
-}
+// Person.prototype.handleMouseenter = function (e) {
+//   const parent = document.getElementById('root');
+//   var divEl = document.createElement("div");
+//   setAttributes(divEl, { id: "popup", class: "popup" });
+//   divEl.style.left = e.clientX + "px";
+//   divEl.style.top = e.clientY + "px";
+//   const lifeSpan = this.person.life_span.hasOwnProperty('diedOn') ? `(${this.person.life_span.bornOn} - ${this.person.life_span.diedOn})` : "";
+//   divEl.innerHTML += `<div>${e.target.innerText}</div><div>${lifeSpan}</div>`;
+//   parent.prepend(divEl);
+// }
 
-Person.prototype.handleClick = function (e) {
-  if (nameCapitalized(this.person.name) === e.currentTarget.innerText) {
-    if (this.person.father) {
-      handleMouseleave();
-      removeSvgRoot();
-      getDomTree(this.person.father, 'tree-structure');
-    }
-  } else {
-    handleMouseleave();
-    removeSvgRoot();
-    getDomTree(this.person.spouse, 'tree-structure');
-  }
-}
+// Person.prototype.handleClick = function (e) {
+//   if (nameCapitalized(this.person.name) === e.currentTarget.innerText) {
+//     if (this.person.father) {
+//       handleMouseleave();
+//       removeSvgRoot();
+//       getDomTree(this.person.father, 'tree-structure');
+//     }
+//   } else {
+//     handleMouseleave();
+//     removeSvgRoot();
+//     getDomTree(this.person.spouse, 'tree-structure');
+//   }
+// }

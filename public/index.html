@@ -12,10 +12,13 @@
 <body>
   <div id="root">
     <form id="submit-form" style="display: block">
-      <input type="text" name="name" id="name_input" list="search_list">Name
-      <datalist id="search_list"></datalist>
+      <div class="search_box">
+        <input type="search" name="name" id="name_input" />
+        <!-- <datalist id="search_list"></datalist> -->
+        <div id="search-list" class="search-list"></div>
+      </div>
       <!-- <input type="text" value="iyyamperumal" placeholder="Grandfather/father" name="root-name" id="root-name" /> -->
-      <input type="submit" value="search" />
+      <!-- <input type="submit" value="search" /> -->
     </form>
     <div id="tree-structure" class="tree-structure"></div>
   </div>

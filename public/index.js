@@ -334,6 +334,14 @@ function Tree(array) {
     this.data = getJson(array);
 }
 
+function getJson(array) {
+    let data = {};
+    array.forEach(t => {
+        data = Object.assign(data, { [t.fname + getLastName(t.lname)]: new Person(t) })
+    })
+    return data;
+}
+
 Tree.prototype.setChildCount = function () {
     Object.values(this.data).forEach(t => {
         const count = getChildCount(t.name);
@@ -346,20 +354,10 @@ Tree.prototype.setTreeWeight = function (name, treeWeight) {
     this.data[name]['treeWeight'] = treeWeight;
 }
 
-// Tree.prototype.setSameTree = function (name) {
-//     const data = Object.assign({}, this.data);
-//     data[name]['isSameTree'] = true;
-//     this.data = data;
-//     console.log('this', this.data)
-// }
-
-function getJson(array) {
-    let data = {};
-    array.forEach(t => {
-        data = Object.assign(data, { [t.fname + getLastName(t.lname)]: new Person(t) })
-    })
-
-    return data;
+Tree.prototype.setSameTree = function (name) {
+    const data = Object.assign({}, this.data);
+    data[name]['isSameTree'] = true;
+    this.data = data;
 }
 
 function getPerson(personName) {
@@ -367,7 +365,7 @@ function getPerson(personName) {
 }
 
 function handleClick(person, e) {
-    if (nameCapitalized(person.name) === e.currentTarget.innerText) {
+    if (person.isSameTree) {
         if (person.father) {
             handleMouseleave();
             removeSvgRoot();
@@ -376,34 +374,31 @@ function handleClick(person, e) {
     } else {
         handleMouseleave();
         removeSvgRoot();
-        getDomTree(person.spouse, 'tree-structure');
+        getDomTree(person.name, 'tree-structure');
     }
 }
 
-function createForeignText(person, rootId, attrs) {
+function createForeignText(personList, attrs) {
     const { id, x, y } = attrs;
-    const rootEl = document.getElementById(rootId);
+    const rootEl = document.getElementById(rootSvgId);
     const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-    const nameList = person.spouse ? 2 : 1;
-    const divFragment = getDivList(person);
-    setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
+    const divFragment = getDivList(personList);
+    setAttributesNs(foreignObjEl, { id, width: getTextWidth(personList.length), height: textHeight, x, y });
     foreignObjEl.appendChild(divFragment);
     rootEl.appendChild(foreignObjEl);
-  }
+}
 
-function getDivList(person) {
+function getDivList(personList) {
     const fragment = new DocumentFragment();
-    const nameList = person.spouse ? [person.name, person.spouse] : [person.name];
-    nameList.forEach(function (name) {
-        const currPerson = getPerson(name);
+    personList.forEach(function (obj) {
         var divEl = document.createElement('div');
-        divEl.addEventListener('mouseenter', handleMouseenter.bind(this, currPerson), false);
+        divEl.addEventListener('mouseenter', handleMouseenter.bind(this, obj), false);
         divEl.addEventListener('mouseleave', handleMouseleave, false);
-        divEl.addEventListener('click', handleClick.bind(this, currPerson), false);
+        divEl.addEventListener('click', handleClick.bind(this, obj), false);
         setAttributes(divEl, { class: "foreign-div" });
-        const nameCaps = nameCapitalized(name);
-        const imgClass = currPerson.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
-        divEl.innerHTML += `<img src="images/${currPerson.image}" alt="${nameCaps}" class="${imgClass}" />`;
+        const nameCaps = nameCapitalized(obj.name);
+        const imgClass = obj.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
+        divEl.innerHTML += `<img src="images/${obj.image}" alt="${nameCaps}" class="${imgClass}" />`;
         divEl.innerHTML += `<div class="name">${nameCaps}</div>`;
         fragment.appendChild(divEl);
     })
@@ -454,7 +449,7 @@ function getDomTree(name, rootId) {
 function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
     //TODO: going local culture now as spouse required to check children contrary to modern culture
     const personId = (person.fname + person.lname) + "-" + getInitial(person);
-    // newJson.setSameTree(person.name);
+    newJson.setSameTree(person.name);
     const hMx1 = lX2 - (hTotalW / 2) * Math.min(1, cL - 1);
     const hLy2 = lY2;
     //lines above child
@@ -474,7 +469,8 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const newHTotalW = person.treeWeight * parentWidth;
 
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
-        createForeignText(person, rootSvgId, { id: personId, x: parentX, y: parentY, getDivList });
+        const spouse = getPerson(person.spouse);
+        createForeignText([person, spouse], { id: personId, x: parentX, y: parentY });
 
         if (newCL) {
             //first path 
@@ -513,7 +509,7 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const parentX = Number.parseFloat((lLx2 - parentWidth / 2).toFixed(2));
         const parentY = lLy2;
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
-        createForeignText(person, rootSvgId, { id: personId, x: parentX, y: parentY, getDivList });
+        createForeignText([person], { id: personId, x: parentX, y: parentY });
     }
 }
 
@@ -530,20 +526,49 @@ getDomTree("iyyam perumal", 'tree-structure');
 // getDomTree("sanvika", 'tree-structure');
 
 const search_name = document.getElementById('name_input');
+const searchListEl = document.getElementById('search-list');
 search_name.addEventListener('keyup', handleSearch, false);
+// search_name.addEventListener('blur', handleBlur, false);
+// search_name.addEventListener('focus', handleFocus, false);
+searchListEl.addEventListener('click', handleOptionClick, false);
+
+
 function handleSearch(e) {
     const value = e.target.value;
     const dataList = Object.values(newJson.data).filter(t => t.name.indexOf(value) !== -1);
-    const datalistEl = document.getElementById('search_list');
-    console.log('sdf', datalistEl);
-    datalistEl.innerHTML = "";
-    datalistEl.appendChild(getDataList(dataList));
+
+    searchListEl.innerHTML = "";
+    searchListEl.appendChild(getDataList(dataList));
+    showSearchList();
 }
 
-const submitForm = document.getElementById('submit-form');
-submitForm.addEventListener('submit', handleSubmit, false);
-function handleSubmit(e) {
-    e.preventDefault();
-    console.log(e);
-
+function hideSearchList() {
+    searchListEl.style.display = "none";
 }
+
+function showSearchList() {
+    searchListEl.style.display = "block";
+}
+
+function handleOptionClick(e) {
+    const value = e.target.textContent;
+    search_name.value = value.replace(/,.+/, "");
+    hideSearchList();
+    getDomTree(search_name.value, 'tree-structure');
+}
+
+const bodyEl = document.body;
+bodyEl.addEventListener('click', function () {
+    console.log('searchListEl.style.display', searchListEl.style.display)
+    if (searchListEl.style.display === "block") {
+        hideSearchList();
+    }
+}, false);
+
+// const submitForm = document.getElementById('submit-form');
+// submitForm.addEventListener('submit', handleSubmit, false);
+// function handleSubmit(e) {
+//     e.preventDefault();
+//     console.log(e);
+
+// }
