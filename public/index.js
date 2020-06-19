@@ -328,23 +328,7 @@ const sample = [
     },
 ]
 
-function Person(obj) {
-    this.name = obj.fname + getLastName(obj.lname);
-    this.fname = obj.fname;
-    this.lname = obj.lname;
-    this.gender = obj.gender === "M" ? GENDER.M : GENDER.F;
-    this.image = obj.image ? obj.image : "avatar.png";
-    this.spouse = obj.spouse || "";
-    this.children = obj.children || [];
-    this.siblings = obj.siblings;
-    this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE; //TODO
-    this.profession = obj.profession //private
-    this.life_span = obj.life_span;
-    this.childCount = this.children.length;
-    this.father = obj.father;
-    this.mother = obj.mother;
-    this.treeWeight = 0;
-}
+
 
 function Tree(array) {
     this.data = getJson(array);
@@ -396,7 +380,18 @@ function handleClick(person, e) {
     }
 }
 
-function getDivList(person) { //TODO: Modular pattern
+function createForeignText(person, rootId, attrs) {
+    const { id, x, y } = attrs;
+    const rootEl = document.getElementById(rootId);
+    const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
+    const nameList = person.spouse ? 2 : 1;
+    const divFragment = getDivList(person);
+    setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
+    foreignObjEl.appendChild(divFragment);
+    rootEl.appendChild(foreignObjEl);
+  }
+
+function getDivList(person) {
     const fragment = new DocumentFragment();
     const nameList = person.spouse ? [person.name, person.spouse] : [person.name];
     nameList.forEach(function (name) {
