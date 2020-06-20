@@ -328,15 +328,6 @@ const sample = [
     },
 ]
 
-function todayDate() {
-    const today = new Date();
-    const m = String(today.getMonth() + 1).length === 1 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1;
-    const d = today.getDate();
-    const y = today.getFullYear();
-    const date = d + "/" + m + "/" + y;
-    return date;
-}
-
 function Tree(array) {
     this.data = getJson(array);
     this.notification = [];

@@ -68,6 +68,15 @@ function removeSvgRoot() {
   element.parentNode.removeChild(element);
 }
 
+function todayDate() {
+  const today = new Date();
+  const m = String(today.getMonth() + 1).length === 1 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1;
+  const d = today.getDate();
+  const y = today.getFullYear();
+  const date = d + "/" + m + "/" + y;
+  return date;
+}
+
 function getSpanList() {
   const fragment = new DocumentFragment();
 
@@ -96,7 +105,6 @@ function getDataList() {
 
 function scrollToCenter(left) {
   const el = document.getElementById(treeStructureId);
-  console.log('d', left);
   el.scrollTo({
     top: 0,
     left,
