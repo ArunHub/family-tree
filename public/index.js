@@ -328,6 +328,12 @@ const sample = [
     },
 ]
 
+window.onload = function () {
+    fetch('/home').then(t=>{
+        return t.text()
+    }).then(f=> console.log(f));
+}
+
 function Tree(array) {
     this.data = getJson(array);
     this.notification = [];
@@ -335,8 +341,6 @@ function Tree(array) {
 
 function getJson(array) {
     let data = {};
-
-
     array.forEach(t => {
         data = Object.assign(data, { [t.fname + getLastName(t.lname)]: new Person(t) })
     })
