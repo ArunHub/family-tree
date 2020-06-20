@@ -324,7 +324,7 @@ const sample = [
         "children": [],
         "father": "",
         "mother": "",
-        "life_span": { bornOn: "19/06/2020", }
+        "life_span": { bornOn: "20/06/2020", }
     },
 ]
 
@@ -356,7 +356,7 @@ Tree.prototype.setChildCount = function () {
     Object.values(this.data).forEach(t => {
         if (todayDate() === t.life_span.bornOn) {
             setNotifications(t);
-        };
+        }
         const count = getChildCount(t.name);
         const treeWeight = getTreeWeight(count);
         this.setTreeWeight(t.name, treeWeight);
@@ -387,12 +387,12 @@ function handleClick(person, e) {
         if (person.father) {
             handleMouseleave();
             removeSvgRoot();
-            getDomTree(person.father, 'tree-structure');
+            getDomTree(person.father, treeStructureId);
         }
     } else {
         handleMouseleave();
         removeSvgRoot();
-        getDomTree(person.name, 'tree-structure');
+        getDomTree(person.name, treeStructureId);
     }
 }
 
@@ -443,7 +443,7 @@ function getDomTree(name, rootId) {
     const rootSvgEl = `<svg id="${rootSvgId}" xmlns="${xmlns}" version="${version}" width="${screenWidth}" height="${screenWidth}" />`;
     const rootEl = document.getElementById(rootId);
     rootEl.innerHTML = rootSvgEl;
-
+    
     const parentWidth = person.spouse ? getTextWidth() : getTextWidth(1);
 
     //determine if total horizontal is greater than horizontal width limit
@@ -455,7 +455,7 @@ function getDomTree(name, rootId) {
         const svgEl = document.getElementById(rootSvgId);
         setAttributesNs(svgEl, { width: newHtmlWidth });
         lX2 = (newHtmlWidth / 2);
-    }
+    }   
 
     const lY2 = 0;
     const hiddenParentWidth = 0;
@@ -487,6 +487,7 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
         const newHTotalW = person.treeWeight * parentWidth;
 
         createPath(rootSvgId, { d: `M ${lMx1} ${lMy1} L ${lLx2} ${lLy2}`, stroke: `${strOrange}` });
+        scrollOnce(lMx1/2);
         const spouse = getPerson(person.spouse);
         createForeignText([person, spouse], { id: personId, x: parentX, y: parentY });
 
@@ -532,16 +533,16 @@ function generateTree(person, i, lX2, lY2, hTotalW, hMidPt, cL) {
 }
 
 const svg = document.getElementById('svg');
-const treeStructure = document.getElementById('tree-structure');
+const treeStructure = document.getElementById(treeStructureId);
 
 const newJson = new Tree(sample);
 newJson.setChildCount();
-getDomTree("iyyam perumal", 'tree-structure');
-// getDomTree("soundara pandian", 'tree-structure');
-// getDomTree("mani", 'tree-structure');
-// getDomTree("abinaya", 'tree-structure');
-// getDomTree("sudaabi", 'tree-structure');
-// getDomTree("sanvika", 'tree-structure');
+getDomTree("iyyam perumal", treeStructureId);
+// getDomTree("soundara pandian", treeStructureId);
+// getDomTree("mani", treeStructureId);
+// getDomTree("abinaya", treeStructureId);
+// getDomTree("sudaabi", treeStructureId);
+// getDomTree("sanvika", treeStructureId);
 
 const search_name = document.getElementById('name_input');
 const searchListEl = document.getElementById('search-list');
@@ -572,7 +573,7 @@ function handleOptionClick(e) {
     const value = e.target.textContent;
     search_name.value = value.replace(/,.+/, "");
     hideSearchList();
-    getDomTree(search_name.value, 'tree-structure');
+    getDomTree(search_name.value, treeStructureId);
 }
 
 const bodyEl = document.body;

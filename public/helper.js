@@ -94,6 +94,31 @@ function getDataList() {
   return fragment;
 }
 
+function scrollToCenter(left) {
+  const el = document.getElementById(treeStructureId);
+  console.log('d', left);
+  el.scrollTo({
+    top: 0,
+    left,
+    behavior: 'smooth'
+  })
+}
+
+function once(fn, context) { 
+	var result;
+
+	return function() { 
+		if(fn) {
+			result = fn.apply(context || this, arguments);
+			fn = null;
+		}
+
+		return result;
+	};
+}
+
+const scrollOnce = once(scrollToCenter);
+
 function createPath(rootTag, attrs) {
   const id = document.getElementById(rootTag);
   const element = document.createElementNS(xmlns, 'path');
@@ -125,59 +150,3 @@ function Person(obj) {
   this.mother = obj.mother;
   this.treeWeight = 0;
 }
-
-// Person.prototype.createForeignText = function (rootId, attrs) {
-//   const { id, x, y } = attrs;
-//   const rootEl = document.getElementById(rootId);
-//   const foreignObjEl = document.createElementNS(xmlns, 'foreignObject');
-//   const nameList = this.person.spouse ? 2 : 1;
-//   const divFragment = this.getDivList(this.person);
-//   setAttributesNs(foreignObjEl, { id, width: getTextWidth(nameList), height: textHeight, x, y });
-//   foreignObjEl.appendChild(divFragment);
-//   rootEl.appendChild(foreignObjEl);
-// }
-
-// Person.prototype.getDivList() = function () {
-//   const fragment = new DocumentFragment();
-//   const nameList = this.person.spouse ? [this.person.name, this.person.spouse] : [this.person.name];
-//   nameList.forEach(function (name) {
-//     const currPerson = getPerson(name);
-//     var divEl = document.createElement('div');
-//     divEl.addEventListener('mouseenter', this.handleMouseenter, false);
-//     divEl.addEventListener('mouseleave', handleMouseleave, false);
-//     divEl.addEventListener('click', this.handleClick, false);
-//     setAttributes(divEl, { class: "foreign-div" });
-//     const nameCaps = nameCapitalized(name);
-//     const imgClass = currPerson.life_span.hasOwnProperty('diedOn') ? "avatar-late" : "";
-//     divEl.innerHTML += `<img src="images/${currPerson.image}" alt="${nameCaps}" class="${imgClass}" />`;
-//     divEl.innerHTML += `<div class="name">${nameCaps}</div>`;
-//     fragment.appendChild(divEl);
-//   })
-
-//   return fragment;
-// }
-
-// Person.prototype.handleMouseenter = function (e) {
-//   const parent = document.getElementById('root');
-//   var divEl = document.createElement("div");
-//   setAttributes(divEl, { id: "popup", class: "popup" });
-//   divEl.style.left = e.clientX + "px";
-//   divEl.style.top = e.clientY + "px";
-//   const lifeSpan = this.person.life_span.hasOwnProperty('diedOn') ? `(${this.person.life_span.bornOn} - ${this.person.life_span.diedOn})` : "";
-//   divEl.innerHTML += `<div>${e.target.innerText}</div><div>${lifeSpan}</div>`;
-//   parent.prepend(divEl);
-// }
-
-// Person.prototype.handleClick = function (e) {
-//   if (nameCapitalized(this.person.name) === e.currentTarget.innerText) {
-//     if (this.person.father) {
-//       handleMouseleave();
-//       removeSvgRoot();
-//       getDomTree(this.person.father, 'tree-structure');
-//     }
-//   } else {
-//     handleMouseleave();
-//     removeSvgRoot();
-//     getDomTree(this.person.spouse, 'tree-structure');
-//   }
-// }
