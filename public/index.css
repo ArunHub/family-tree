@@ -110,3 +110,8 @@ path{
   font-weight: bold;
 }
 
+.loader{
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}

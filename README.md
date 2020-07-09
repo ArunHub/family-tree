@@ -50,4 +50,8 @@ final usage and link for testing will be provided.
 - Domain like imarun.com is hosted in Apache server and i cannot host in node js server since Web host provider didnt provide access.
 - I can host nodejs app in AWS / Heroku
 - I can able to host web services and static files in same server itself
-  
+
+**Update 7/9/20**
+- Hosted nodejs Express app as backend api service in AWS
+- Connected with mongodb
+- hosted my files frontend files in imarun.com
