@@ -1,17 +1,3 @@
-// function getAnniversary(anniversary) {//birth, death, marriage, 60yrs
-//   switch (anniversary.type) {
-//     case ANNIVERSARY_TYPE.MARRIAGE:
-
-//       break;
-//     case ANNIVERSARY_TYPE.DEATH:
-//       break;
-//     default:
-//       return {
-//         birthday: anniversary.date,
-//       }
-//   }
-// };
-
 function getTreeWeight(count) {//till parent didnt have child then treeweight is 0
   return Math.max(2, count) - 2;
 }
@@ -60,7 +46,9 @@ function handleMouseenter(person, e) {
 
 function handleMouseleave() {
   const popup = document.getElementById('popup');
-  popup.parentNode.removeChild(popup);
+  if (popup) {
+    popup.parentNode.removeChild(popup);
+  }
 }
 
 function removeSvgRoot() {
@@ -154,8 +142,8 @@ function Person(obj) {
   this.spouse = obj.spouse || "";
   this.children = obj.children || [];
   this.siblings = obj.siblings; //TODO for calling relationships
-  this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE; //TODO
-  this.profession = obj.profession //private
+  // this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE; //TODO
+  // this.profession = obj.profession //private
   this.life_span = obj.life_span;
   this.childCount = this.children.length;
   this.father = obj.father;

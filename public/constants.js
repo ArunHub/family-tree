@@ -1,12 +1,12 @@
-const GENDER = {
-  M: "MALE",
-  F: "FEMALE"
-}
-
 const ANNIVERSARY_TYPE = {
   MARRIAGE: "MARRIAGE",
   BIRTH: "BIRTHDAY",
   DEATH: "DEATH"
+}
+
+const GENDER = {
+  M: "MALE",
+  F: "FEMALE"
 }
 
 const MARITAL_STATUS = {

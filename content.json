@@ -1,47 +1,2400 @@
-{
-  "iyyamperumal":{
-    "isParent": true,
-    "gender": "M",
-    "_age": 68,
-    "spouse": "thangammal",
-    "children": ["soundarapandian","mani", "selvakumar"]
+[{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1810"
   },
-  "thangammal":{},
-  "soundarapandian":{
-    "isParent": true,
-    "gender": "M",
-    "_age": 58,
-    "spouse": "thulasirani",
-    "children": [   "sudarshan",  "abinaya"],
-    "siblings": ["mani", "selvakumar"]
+  "fname": "iyyam",
+  "lname": "perumal",
+  "spouse": "thangammal",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020",
+    "diedOn": "14-12-1996"
   },
-  "thulasirani":{
-    "_age": 50,
-    "gender": "F",
-    "isParent": true,
-    "spouse": "soundarapandian",
-    "children": ["sudarshan", "abi"]
+  "children": [
+    "poongudi",
+    "thangaraj",
+    "soundara pandian",
+    "mani",
+    "selva kumar",
+    "panjavarnam"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1811"
   },
-  "sudarshan": {
-    "gender": "M",
-    "_age": 31,
-    "isParent": false,
-    "siblings": ["abi"]
+  "fname": "thangammal",
+  "lname": "",
+  "spouse": "iyyam perumal",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "01/01/1940",
+    "diedOn": "22-06-2008"
   },
-  "abinaya":{
-    "gender":"F",
-    "_age":28,
-    "isParent": true,
-    "spouse":"vijayaprabhu",
-    "children":["sanvika"],
-    "siblings":["sudarshan"]
+  "children": [
+    "soundara pandian",
+    "mani",
+    "selva kumar"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1812"
   },
-  "vijayaprabhu":{
-    "gender": "M",
-    "isParent":true,
-    "spouse": "abinaya",
-    "_age":31,
-    "children":["sanvika"],
-    "siblings":[]
+  "fname": "soundara",
+  "lname": "pandian",
+  "gender": "M",
+  "spouse": "thulasirani",
+  "children": [
+    "sudarshan",
+    "abinaya"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
   }
-}
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1813"
+  },
+  "fname": "thulasirani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "soundara pandian",
+  "children": [
+    "sudarshan",
+    "abinaya"
+  ],
+  "father": "kasi nadar",
+  "mother": "annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1814"
+  },
+  "fname": "abinaya",
+  "lname": "",
+  "gender": "F",
+  "spouse": "vijay prabhu",
+  "children": [
+    "sanvika"
+  ],
+  "father": "soundara pandian",
+  "mother": "thulasirani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1815"
+  },
+  "fname": "vijay",
+  "lname": "prabhu",
+  "gender": "M",
+  "spouse": "abinaya",
+  "children": [
+    "sanvika"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1816"
+  },
+  "fname": "mani",
+  "lname": "",
+  "gender": "M",
+  "spouse": "sundari",
+  "children": [
+    "arun kumar",
+    "preethi"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1817"
+  },
+  "fname": "sundari",
+  "lname": "",
+  "gender": "F",
+  "spouse": "mani",
+  "children": [
+    "arun kumar",
+    "preethi"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1818"
+  },
+  "fname": "selva",
+  "lname": "kumar",
+  "gender": "M",
+  "spouse": "pushparani",
+  "children": [
+    "rashika",
+    "sham deepak"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1819"
+  },
+  "fname": "pushparani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "selva kumar",
+  "children": [
+    "rashika",
+    "sham deepak"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c181a"
+  },
+  "fname": "sudarshan",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "soundara pandian",
+  "mother": "thulasirani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c181e"
+  },
+  "fname": "sanvika",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "vijay prabhu",
+  "mother": "abinaya",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c181f"
+  },
+  "fname": "arun",
+  "lname": "kumar",
+  "gender": "M",
+  "spouse": "",
+  "father": "mani",
+  "mother": "sundari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1820"
+  },
+  "fname": "sham",
+  "lname": "deepak",
+  "gender": "M",
+  "spouse": "",
+  "father": "selva kumar",
+  "mother": "pushparani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1822"
+  },
+  "fname": "preethi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "mani",
+  "mother": "sundari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1823"
+  },
+  "fname": "rashika",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "selva kumar",
+  "mother": "pushparani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1824"
+  },
+  "fname": "raja",
+  "lname": "manickam",
+  "gender": "M",
+  "spouse": "poongudi",
+  "children": [
+    "raja",
+    "muthu kumar"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1825"
+  },
+  "fname": "poongudi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "raja manickam",
+  "children": [
+    "raja",
+    "muthu kumar"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1826"
+  },
+  "fname": "raja",
+  "lname": "",
+  "gender": "M",
+  "spouse": "rajirajeshwari",
+  "children": [
+    "rajavel"
+  ],
+  "father": "raja manickam",
+  "mother": "poongudi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1827"
+  },
+  "fname": "rajirajeshwari",
+  "lname": "",
+  "gender": "F",
+  "spouse": "raja",
+  "children": [
+    "rajavel"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1828"
+  },
+  "fname": "rajavel",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "raja",
+  "mother": "raji",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c1829"
+  },
+  "fname": "muthu",
+  "lname": "kumar",
+  "gender": "M",
+  "spouse": "indhu mathi",
+  "children": [],
+  "father": "raja manickam",
+  "mother": "poongudi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f06f07f9db4981bb06c182a"
+  },
+  "fname": "indhu",
+  "lname": "mathi",
+  "gender": "F",
+  "spouse": "muthu kumar",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "20/06/2020"
+  }
+},{
+  "_id": {
+    "$oid": "5f072c9fbb37530984714e09"
+  },
+  "fname": "thangaraj",
+  "lname": "",
+  "spouse": "vasuki",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [
+    "vijayalakshmi",
+    "Dhanalakshmi",
+    "gandhi madhi azhagan",
+    "kartheesen"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e0d"
+  },
+  "fname": "vijayalakshmi",
+  "lname": "",
+  "spouse": "bhaskar",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "thangaraj",
+  "mother": "vasuki"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e0e"
+  },
+  "fname": "bhaskar",
+  "lname": "",
+  "spouse": "vijayalakshmi",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e0f"
+  },
+  "fname": "dhanalakshmi",
+  "lname": "",
+  "spouse": "vijaya kumar",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "thangaraj",
+  "mother": "vasuki"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e10"
+  },
+  "fname": "vijaya",
+  "lname": "kumar",
+  "spouse": "dhanalakshmi",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e11"
+  },
+  "fname": "gandhi madhi",
+  "lname": "azhagan",
+  "spouse": "",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "thangaraj",
+  "mother": "vasuki"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e12"
+  },
+  "fname": "kartheesen",
+  "lname": "",
+  "spouse": "",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "thangaraj",
+  "mother": "vasuki"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e13"
+  },
+  "fname": "panjavarnam",
+  "lname": "",
+  "spouse": "kadarkaraipandian",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [
+    "rajeshwari",
+    "ram kumar"
+  ],
+  "father": "iyyam perumal",
+  "mother": "thangammal"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e14"
+  },
+  "fname": "kadarkaraipandian",
+  "lname": "",
+  "spouse": "panjavarnam",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [
+    "rajeshwari",
+    "ram kumar"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e15"
+  },
+  "fname": "arun",
+  "lname": "jeyaprasad",
+  "spouse": "rajeshwari",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e16"
+  },
+  "fname": "ram",
+  "lname": "kumar",
+  "spouse": "",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "kadarkaraipandian",
+  "mother": "panjavarnam"
+},{
+  "_id": {
+    "$oid": "5f07314cbb37530984714e17"
+  },
+  "fname": "rajeshwari",
+  "lname": "",
+  "spouse": "arun jeyaprasad",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [],
+  "father": "kadarkaraipandian",
+  "mother": "panjavarnam"
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceaa"
+  },
+  "fname": "balsamy",
+  "lname": "nadar",
+  "spouse": "balammal",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020",
+    "diedOn": "14-12-2012"
+  },
+  "children": [
+    "kamaraj",
+    "pethanatchi",
+    "Rani",
+    "Selvi",
+    "sundari",
+    "Meena"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceab"
+  },
+  "fname": "balammal",
+  "lname": "",
+  "spouse": "balsamy nadar",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [
+    "kamaraj",
+    "pethanatchi",
+    "Rani",
+    "Selvi",
+    "sundari",
+    "Meena"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceac"
+  },
+  "fname": "kamaraj",
+  "lname": "",
+  "gender": "M",
+  "spouse": "mariammal",
+  "children": [
+    "Rajalakshmi"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becead"
+  },
+  "fname": "mariammal",
+  "lname": "",
+  "gender": "F",
+  "spouse": "kamaraj",
+  "children": [
+    "Rajalakshmi"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceae"
+  },
+  "fname": "Rajalakshmi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Sudakar marikani",
+  "children": [
+    "Mithra",
+    "Bhuvan"
+  ],
+  "father": "mariammal",
+  "mother": "kamaraj",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceaf"
+  },
+  "fname": "Sudakar ",
+  "lname": "marikani",
+  "gender": "M",
+  "spouse": "",
+  "children": [
+    "Mithra",
+    "Bhuvan"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb0"
+  },
+  "fname": "Mithra",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Sudakar marikani",
+  "mother": "Rajalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb1"
+  },
+  "fname": "Bhuvan",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Sudakar marikani",
+  "mother": "Rajalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb2"
+  },
+  "fname": "Pethanatchi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "shanmugapandian",
+  "children": [
+    "Valar mathi",
+    "chithra",
+    "vinod"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb3"
+  },
+  "fname": "shanmugapandian",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Pethanatchi",
+  "children": [
+    "Valar mathi",
+    "chithra",
+    "vinod"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb4"
+  },
+  "fname": "Nagaraj",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Valar mathi",
+  "children": [
+    "kishore",
+    "valargirl"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb5"
+  },
+  "fname": "Valar",
+  "lname": "mathi",
+  "gender": "F",
+  "spouse": "Nagaraj",
+  "children": [
+    "kishore",
+    "valargirl"
+  ],
+  "father": "shanmugapandian",
+  "mother": "Pethanatchi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb6"
+  },
+  "fname": "valargirl",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Nagaraj",
+  "mother": "Valar mathi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb7"
+  },
+  "fname": "kishore",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Nagaraj",
+  "mother": "Valar mathi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb8"
+  },
+  "fname": "chithra",
+  "lname": "",
+  "gender": "F",
+  "spouse": "vasanth",
+  "children": [
+    "prithviraj",
+    "chitragirl"
+  ],
+  "father": "shanmugapandian",
+  "mother": "Pethanatchi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceb9"
+  },
+  "fname": "vasanth",
+  "lname": "",
+  "gender": "M",
+  "spouse": "chithra",
+  "children": [
+    "prithviraj",
+    "chitragirl"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beceba"
+  },
+  "fname": "chitragirl",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "vasanth",
+  "mother": "chithra",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becebb"
+  },
+  "fname": "prithviraj",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "vasanth",
+  "mother": "chithra",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becebc"
+  },
+  "fname": "vinod",
+  "lname": "",
+  "gender": "M",
+  "spouse": "sangeetha",
+  "children": [
+    "ashvika"
+  ],
+  "father": "shanmugapandian",
+  "mother": "Pethanatchi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becebd"
+  },
+  "fname": "sangeetha",
+  "lname": "",
+  "gender": "F",
+  "spouse": "vinod",
+  "children": [
+    "ashvika"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becebe"
+  },
+  "fname": "ashvika",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "vinod",
+  "mother": "sangeetha",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becebf"
+  },
+  "fname": "Rani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "siluvainathan",
+  "children": [
+    "Sabestian",
+    "Mary"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec0"
+  },
+  "fname": "siluvainathan",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rani",
+  "children": [
+    "Sabestian",
+    "Mary"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec1"
+  },
+  "fname": "Sabestian",
+  "lname": "",
+  "gender": "M",
+  "spouse": "jebba",
+  "children": [
+    "sabestian_boy",
+    "jennifer"
+  ],
+  "father": "siluvainathan",
+  "mother": "Rani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec2"
+  },
+  "fname": "jebba",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Sabestian",
+  "children": [
+    "sabestian_boy",
+    "Jennifer"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec3"
+  },
+  "fname": "Jennifer",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Sabestian",
+  "mother": "jebba",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec4"
+  },
+  "fname": "Mary",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Regi kumar",
+  "children": [
+    "marygirl",
+    "Regiboy"
+  ],
+  "father": "siluvainathan",
+  "mother": "Rani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec5"
+  },
+  "fname": "Regi ",
+  "lname": "kumar",
+  "gender": "M",
+  "spouse": "Mary",
+  "children": [
+    "marygirl",
+    "Regiboy"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec6"
+  },
+  "fname": "marygirl",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Regi kumar",
+  "mother": "Mary",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec7"
+  },
+  "fname": "Regiboy",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Regi kumar",
+  "mother": "Mary",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec8"
+  },
+  "fname": "Selvi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajagopal",
+  "children": [
+    "Rathna kumari",
+    "srikanth"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becec9"
+  },
+  "fname": "Rajagopal",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Selvi",
+  "children": [
+    "Rathna kumari",
+    "srikanth"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778bececa"
+  },
+  "fname": "Rathna ",
+  "lname": "kumari",
+  "gender": "F",
+  "spouse": "Selva",
+  "children": [
+    "Dhanshika",
+    "selvaboy"
+  ],
+  "father": "Rajagopal",
+  "mother": "selvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778bececb"
+  },
+  "fname": "Selva",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rathna kumari",
+  "children": [
+    "Dhanshika",
+    "selvaboy"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778bececc"
+  },
+  "fname": "Dhanshika",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Selva",
+  "mother": "Rathna kumari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778bececd"
+  },
+  "fname": "selvaboy",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Selva",
+  "mother": "Rathna kumari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778becece"
+  },
+  "fname": "srikanth",
+  "lname": "",
+  "gender": "M",
+  "spouse": "yuvarani",
+  "children": [
+    "shrithik"
+  ],
+  "father": "Rajagopal",
+  "mother": "selvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778bececf"
+  },
+  "fname": "yuvarani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "srikanth",
+  "children": [
+    "shrithik"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced0"
+  },
+  "fname": "shrithik",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "srikanth",
+  "mother": "yuvarani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced1"
+  },
+  "fname": "Meena",
+  "lname": "",
+  "gender": "F",
+  "spouse": "ponpandian",
+  "children": [
+    "ponselvam Ajith",
+    "vignesh goutham",
+    "suriya"
+  ],
+  "father": "balsamy nadar",
+  "mother": "balammal",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced2"
+  },
+  "fname": "ponpandian",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Meena",
+  "children": [
+    "ponselvam Ajith",
+    "vignesh goutham",
+    "suriya"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced3"
+  },
+  "fname": "ponselvam ",
+  "lname": "Ajith",
+  "gender": "M",
+  "spouse": "",
+  "father": "ponpandian",
+  "mother": "Meena",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced4"
+  },
+  "fname": "vignesh ",
+  "lname": "goutham",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "ponpandian",
+  "mother": "Meena",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f48a7f48271778beced5"
+  },
+  "fname": "suriya",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "ponpandian",
+  "mother": "Meena",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778beced6"
+  },
+  "fname": "Kasi",
+  "lname": "nadar",
+  "spouse": "Annalakshmi",
+  "gender": "M",
+  "life_span": {
+    "bornOn": "19/06/2020",
+    "diedOn": "14-12-2012"
+  },
+  "children": [
+    "thangamani",
+    "thulasirani",
+    "Adhilakshmi",
+    "Gandhimadhi",
+    "Vijayalingam"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778beced7"
+  },
+  "fname": "Annalakshmi",
+  "lname": "",
+  "spouse": "Kasi nadar",
+  "gender": "F",
+  "life_span": {
+    "bornOn": "19/06/2020"
+  },
+  "children": [
+    "thangamani",
+    "thulasirani",
+    "Adhilakshmi",
+    "Gandhimadhi",
+    "Vijayalingam"
+  ],
+  "father": "",
+  "mother": ""
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778beced8"
+  },
+  "fname": "thangamani",
+  "lname": "",
+  "gender": "M",
+  "spouse": "thulasi",
+  "children": [
+    "sooriya",
+    "punita"
+  ],
+  "father": "kasi nadar",
+  "mother": "Annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778beced9"
+  },
+  "fname": "thulasi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "thangamani",
+  "children": [
+    "sooriya",
+    "punita"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778beceda"
+  },
+  "fname": "punita",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "thangamani",
+  "mother": "thulasi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becedb"
+  },
+  "fname": "sooriya",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "thangamani",
+  "mother": "thulasi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becedc"
+  },
+  "fname": "Adhilakshmi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Azhaguraja",
+  "children": [
+    "Sivapriyadharshini",
+    "Yogesh gireesen"
+  ],
+  "father": "kasi nadar",
+  "mother": "Annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becedd"
+  },
+  "fname": "Azhaguraja ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Adhilakshmi",
+  "children": [
+    "Sivapriyadharshini",
+    "Yogesh gireesen"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becede"
+  },
+  "fname": "Sivapriyadharshini",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "father": "Azhaguraja",
+  "mother": "Adhilakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becedf"
+  },
+  "fname": "Yogesh ",
+  "lname": "gireesen",
+  "gender": "M",
+  "spouse": "",
+  "father": "Azhaguraja",
+  "mother": "Adhilakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee0"
+  },
+  "fname": "Gandhimadhi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Velmurugan",
+  "children": [
+    "Gokul Raaj"
+  ],
+  "father": "kasi nadar",
+  "mother": "Annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee1"
+  },
+  "fname": "Velmurugan",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Gandhimadhi",
+  "children": [
+    "Gokul Raaj"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee2"
+  },
+  "fname": "Gokul ",
+  "lname": "Raaj",
+  "gender": "M",
+  "spouse": "",
+  "father": "velmurugan",
+  "mother": "Gandhimadhi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee3"
+  },
+  "fname": "Vijayalingam",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Sermagani",
+  "children": [
+    "Poornima thulasidevi",
+    "Goutham Sairam"
+  ],
+  "father": "kasi nadar",
+  "mother": "Annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee4"
+  },
+  "fname": "Sermagani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Vijayalingam",
+  "children": [
+    "Poornima thulasidevi",
+    "Goutham Sairam"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee5"
+  },
+  "fname": "Poornima ",
+  "lname": "thulasidevi",
+  "gender": "F",
+  "spouse": "",
+  "father": "Vijayalingam",
+  "mother": "Sermagani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f07f9607f48271778becee6"
+  },
+  "fname": "Goutham ",
+  "lname": "Sairam",
+  "gender": "M",
+  "spouse": "",
+  "father": "Vijayalingam",
+  "mother": "Sermagani",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becee7"
+  },
+  "fname": "Rajasekhar",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Thenmozhi",
+  "children": [
+    "Inbasekaran",
+    "Muthukani"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becee8"
+  },
+  "fname": "Thenmozhi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajasekhar",
+  "children": [
+    "Inbasekaran",
+    "Muthukani"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becee9"
+  },
+  "fname": "Muthukani",
+  "lname": "",
+  "gender": "F",
+  "spouse": "muthukani_husband",
+  "children": [],
+  "father": "Rajasekhar",
+  "mother": "Thenmozhi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceea"
+  },
+  "fname": "muthukani_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Muthukani",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceeb"
+  },
+  "fname": "Inbasekaran",
+  "lname": "",
+  "gender": "M",
+  "spouse": "inba_spouse",
+  "father": "Rajasekhar",
+  "mother": "Thenmozhi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceec"
+  },
+  "fname": "inba_spouse",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Inbasekaran",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceed"
+  },
+  "fname": "Tamilselvi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Gunasekar",
+  "children": [
+    "Sriram ",
+    "Nivedhetha",
+    "babloo"
+  ],
+  "father": "kasi nadar",
+  "mother": "Annalakshmi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceee"
+  },
+  "fname": "Gunasekar ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Tamilselvi",
+  "children": [
+    "Nivedhetha",
+    "Sriram ",
+    "babloo"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778beceef"
+  },
+  "fname": "Nivedhetha",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Nivedhetha_husband",
+  "father": "Gunasekar",
+  "mother": "Tamilselvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef0"
+  },
+  "fname": "sriram_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "sriram",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef1"
+  },
+  "fname": "Nivedhetha_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Nivedhetha",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef2"
+  },
+  "fname": "Sriram ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "sriram_wife",
+  "father": "Gunasekar",
+  "mother": "Tamilselvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef3"
+  },
+  "fname": "babloo ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Gunasekar",
+  "mother": "Tamilselvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef4"
+  },
+  "fname": "Swarna latha",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Chandrasekar",
+  "children": [
+    "Sooriya"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef5"
+  },
+  "fname": "Chandrasekar",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Swarna latha",
+  "children": [
+    "Sooriya"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef6"
+  },
+  "fname": "Sooriya ",
+  "lname": "",
+  "gender": "F",
+  "spouse": "sooriya_husband",
+  "father": "Chandrasekar",
+  "mother": "Swarna latha",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef7"
+  },
+  "fname": "sooriya_husband ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Sooriya",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef8"
+  },
+  "fname": "Thangasekar",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rajakumari",
+  "children": [
+    "Aravind sekar",
+    "Anbusekar"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becef9"
+  },
+  "fname": "Rajakumari",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Thangasekar",
+  "children": [
+    "Aravind sekar",
+    "Anbusekar"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becefa"
+  },
+  "fname": "Aravind  ",
+  "lname": "sekar",
+  "gender": "M",
+  "spouse": "",
+  "father": "Thangasekar",
+  "mother": "Rajakumari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08011e7f48271778becefb"
+  },
+  "fname": "Anbusekar ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Thangasekar",
+  "mother": "Rajakumari",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becefc"
+  },
+  "fname": "Dhanaraj",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Tamil Selvi",
+  "children": [
+    "Bharath",
+    "bharath_sister"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becefd"
+  },
+  "fname": "Tamil",
+  "lname": "Selvi",
+  "gender": "F",
+  "spouse": "Dhanaraj",
+  "children": [
+    "Bharath",
+    "bharath_sister"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becefe"
+  },
+  "fname": "bharath_sister",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "Dhanaraj",
+  "mother": "Tamil Selvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778beceff"
+  },
+  "fname": "Bharath",
+  "lname": "",
+  "gender": "M",
+  "spouse": "bharath_wife",
+  "father": "Dhanaraj",
+  "mother": "Tamil Selvi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf00"
+  },
+  "fname": "bharath_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Bharath",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf01"
+  },
+  "fname": "janaki",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Panneerselvam",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf02"
+  },
+  "fname": "Panneerselvam",
+  "lname": "",
+  "gender": "M",
+  "spouse": "janaki",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf03"
+  },
+  "fname": "Sulochanapandi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Sulochanapandi_husband",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf04"
+  },
+  "fname": "anandhi_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "anandhi",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf05"
+  },
+  "fname": "Sulochanapandi_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Sulochanapandi",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf06"
+  },
+  "fname": "anandhi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "anandhi_husband",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf07"
+  },
+  "fname": "pandi",
+  "lname": "",
+  "gender": "M",
+  "spouse": "pandi_wife",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0806237f48271778becf08"
+  },
+  "fname": "pandi_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "pandi",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0807517f48271778becf09"
+  },
+  "fname": "Jeyaraj",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Sivagami",
+  "children": [
+    "Bharath",
+    "bharath_sister"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0807517f48271778becf0a"
+  },
+  "fname": "Sivagami",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Jeyaraj",
+  "children": [
+    "Siva Kumar",
+    "SivaKumar_sister"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0807517f48271778becf0b"
+  },
+  "fname": "SivaKumar_sister",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "Jeyaraj",
+  "mother": "Sivagami",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0807517f48271778becf0c"
+  },
+  "fname": "Siva ",
+  "lname": "Kumar",
+  "gender": "M",
+  "spouse": "Siva_wife",
+  "father": "Jeyaraj",
+  "mother": "Sivagami",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0807517f48271778becf0d"
+  },
+  "fname": "Siva_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Siva kumar",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf0e"
+  },
+  "fname": "Balu",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Nithyadevi",
+  "children": [
+    "baluboy",
+    "baluboy2"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf0f"
+  },
+  "fname": "Nithyadevi",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Balu",
+  "children": [
+    "baluboy",
+    "baluboy2"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf10"
+  },
+  "fname": "baluboy",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "Balu",
+  "mother": "Nithyadevi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf11"
+  },
+  "fname": "baluboy2 ",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "Balu",
+  "mother": "Nithyadevi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf12"
+  },
+  "fname": "Senthil",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Thamarai Devi",
+  "children": [
+    "priyadharshini"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf13"
+  },
+  "fname": "Thamarai",
+  "lname": "Devi",
+  "gender": "F",
+  "spouse": "Senthil",
+  "children": [
+    "priyadharshini"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0808437f48271778becf14"
+  },
+  "fname": "priyadharshini",
+  "lname": "",
+  "gender": "F",
+  "spouse": "",
+  "children": [],
+  "father": "Senthil",
+  "mother": "Thamarai Devi",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf15"
+  },
+  "fname": "Prakash",
+  "lname": "",
+  "gender": "M",
+  "spouse": "prakash_wife",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf16"
+  },
+  "fname": "prakash_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Prakash",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf17"
+  },
+  "fname": "Rajesh1",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rajesh1_wife",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf18"
+  },
+  "fname": "Rajesh1_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajesh1",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf19"
+  },
+  "fname": "Rajesh2",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1a"
+  },
+  "fname": "Rajesh_sister",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajesh_sister_husband",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1b"
+  },
+  "fname": "Rajesh_sister_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rajesh_sister",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1c"
+  },
+  "fname": "Prakash",
+  "lname": "",
+  "gender": "M",
+  "spouse": "prakash_wife",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1d"
+  },
+  "fname": "prakash_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Prakash",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1e"
+  },
+  "fname": "Rajesh1",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rajesh1_wife",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf1f"
+  },
+  "fname": "Rajesh1_wife",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajesh1",
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf20"
+  },
+  "fname": "Rajesh2",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf21"
+  },
+  "fname": "Rajesh_sister",
+  "lname": "",
+  "gender": "F",
+  "spouse": "Rajesh_sister_husband",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f0809427f48271778becf22"
+  },
+  "fname": "Rajesh_sister_husband",
+  "lname": "",
+  "gender": "M",
+  "spouse": "Rajesh_sister",
+  "children": [],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f081c1f7f48271778becf23"
+  },
+  "fname": "vasuki",
+  "lname": "",
+  "gender": "F",
+  "spouse": "thangaraj",
+  "children": [
+    "vijayalakshmi",
+    "Dhanalakshmi",
+    "gandhi madhi azhagan",
+    "kartheesen"
+  ],
+  "father": "",
+  "mother": "",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+},{
+  "_id": {
+    "$oid": "5f08267d7f48271778becf24"
+  },
+  "fname": "sabestian_boy",
+  "lname": "",
+  "gender": "M",
+  "spouse": "",
+  "father": "sabestian",
+  "mother": "jebba",
+  "life_span": {
+    "bornOn": "01/01/1940"
+  }
+}]

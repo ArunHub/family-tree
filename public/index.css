@@ -115,3 +115,8 @@ path{
   justify-content: center;
   align-content: center;
 }
+
+footer{
+  margin-top: 6rem;
+  margin-left: 1rem;
+}
