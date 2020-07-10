@@ -18,7 +18,7 @@ const MARITAL_STATUS = {
 
 const strWidth = 2;
 const mL = 10; //margin-left
-const middleRatio = 0.65;
+const middleRatio = 0.68;
 const textWidth = 80;
 const foreignWidth = 2 * textWidth;
 const textHeight = 20 + 50; //50 for image dimension

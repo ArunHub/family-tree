@@ -334,7 +334,7 @@ function Tree(obj) {
 function getJson(array) {
     let data = {};
     array.forEach(t => {
-        data = Object.assign(data, { [t.fname + getLastName(t.lname)]: new Person(t) })
+        data = Object.assign(data, { [replaceTrim(t.fname) + getLastName(t.lname)]: new Person(t) })
     })
     return data;
 }
@@ -366,6 +366,10 @@ Tree.prototype.setSameTree = function (name) {
 }
 
 function getPerson(personName) {
+    if (!newJson.data[personName]) {
+        const modified = replaceTrim(personName);
+        return newJson.data[modified];
+    }
     return newJson.data[personName];
 }
 

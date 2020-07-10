@@ -54,7 +54,7 @@ function handleMouseenter(person, e) {
   divEl.style.left = e.clientX + "px";
   divEl.style.top = e.clientY + "px";
   const lifeSpan = person.life_span.hasOwnProperty('diedOn') ? `(${person.life_span.bornOn} - ${person.life_span.diedOn})` : "";
-  divEl.innerHTML += `<div>${e.target.innerText}</div><div>${lifeSpan}</div>`;
+  divEl.innerHTML += `<div>${(e.target.innerText) ? e.target.innerText : e.target.textContent}</div><div>${lifeSpan}</div>`;
   parent.prepend(divEl);
 }
 
@@ -112,17 +112,17 @@ function scrollToCenter(left) {
   })
 }
 
-function once(fn, context) { 
-	var result;
+function once(fn, context) {
+  var result;
 
-	return function() { 
-		if(fn) {
-			result = fn.apply(context || this, arguments);
-			fn = null;
-		}
+  return function () {
+    if (fn) {
+      result = fn.apply(context || this, arguments);
+      fn = null;
+    }
 
-		return result;
-	};
+    return result;
+  };
 }
 
 const scrollOnce = once(scrollToCenter);
@@ -141,9 +141,13 @@ function createSvg(rootTag, attrs) {
   id.innerHTML += element;
 }
 
+function replaceTrim(name) {
+  return name.replace(name.charAt(0), name.charAt(0).toLowerCase()).trim();
+}
+
 function Person(obj) {
-  this.name = obj.fname + getLastName(obj.lname);
-  this.fname = obj.fname;
+  this.name = replaceTrim(obj.fname) + getLastName(obj.lname);
+  this.fname = replaceTrim(obj.fname);
   this.lname = obj.lname;
   this.gender = obj.gender === "M" ? GENDER.M : GENDER.F;
   this.image = obj.image ? obj.image : "avatar.png";
