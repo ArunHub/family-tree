@@ -7,23 +7,13 @@ SVG
 ### Why ?
 Just to learn SVG, i had developed this family tree structure using my family details.
 
-
 ### How to use?
 
 Download or clone the setup, then open command prompt in the folder and type
-> node server.js
-> open chrome browser and type localhost:3000 in address bar to run it
-
-**Still under construction**
-
-After achieving the generic purpose of ,
-
-- Searching family member through autocomplete,
-- adding provision for other family members through request button
-- provision for external JSON structure
-- including global factors including culture and tradition around the world
-
-final usage and link for testing will be provided.
+- Uncomment two lines in server.js and public/index.js with comment as "setup for local development"
+- comment the external fetch api service link in public/index.js
+- node server.js
+- open chrome browser and type localhost:3000 in address bar to run it
 
 #### Learnt from this site:
 
@@ -55,3 +45,13 @@ final usage and link for testing will be provided.
 - Hosted nodejs Express app as backend api service in AWS and learnt CORS also to connect, allow single origin
 - Connected with mongodb
 - hosted my files frontend files in imarun.com
+
+
+**Some TODOS**
+- Ratio problem and colliding svg paths(like in sabas) which needs to be flexible
+- More details in popup like profession and age
+- Anniversary in Notification area.
+- Add more family data , images, animations and some design changes
+- provision for external JSON structure
+- is it possible for srilankan names in fixed width 80px ?
+- including global factors including culture and tradition around the world

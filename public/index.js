@@ -45,6 +45,12 @@ function getPerson(personName) {
     return newJson.data[personName];
 }
 
+//created this function in order to find person with same name and fetch from Tree data object but since data object will override incoming same name with existing data . Dropping this idea and future implemention should be in mongodb database implementation better
+
+// function getChild(name, parent) {
+//     return Object.values(newJson.data).find(t => t.name === name && ((t.father === parent) || (t.mother === parent)));
+// }
+
 function handleClick(person, e) {
     if (person.isSameTree) {
         if (person.father) {
@@ -202,8 +208,8 @@ let newJson;
 window.onload = function () {
     const loaderEl = document.getElementById('loader');
 
-    // fetch('http://localhost:4000/data').then(t => {
-        fetch('http://52.66.178.232:4000/data').then(t => {
+    // fetch('http://localhost:3000/data').then(t => { // setup for local development
+    fetch('http://52.66.178.232:4000/data').then(t => {
         return t.json();
     }).then(f => {
         loaderEl.style.display = "none";
@@ -212,13 +218,6 @@ window.onload = function () {
         getDomTree("iyyam perumal", treeStructureId);
     });
 }
-// const newJson = new Tree(sample);
-
-// getDomTree("soundara pandian", treeStructureId);
-// getDomTree("mani", treeStructureId);
-// getDomTree("abinaya", treeStructureId);
-// getDomTree("sudaabi", treeStructureId);
-// getDomTree("sanvika", treeStructureId);
 
 const search_name = document.getElementById('name_input');
 const searchListEl = document.getElementById('search-list');

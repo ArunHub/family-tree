@@ -140,13 +140,13 @@ function Person(obj) {
   this.gender = obj.gender === "M" ? GENDER.M : GENDER.F;
   this.image = obj.image ? obj.image : "avatar.png";
   this.spouse = obj.spouse || "";
-  this.children = obj.children || [];
-  this.siblings = obj.siblings; //TODO for calling relationships
+  this.children = obj.children ? obj.children.map(t => replaceTrim(t)) : [];
+  // this.siblings = obj.siblings; //TODO for calling relationships
   // this.marital_status = this.spouse ? MARITAL_STATUS.MARRIED : obj.marital_status ? obj.marital_status : MARITAL_STATUS.SINGLE; //TODO
   // this.profession = obj.profession //private
   this.life_span = obj.life_span;
   this.childCount = this.children.length;
-  this.father = obj.father;
-  this.mother = obj.mother;
+  this.father = replaceTrim(obj.father);
+  this.mother = replaceTrim(obj.mother);
   this.treeWeight = 0;
 }

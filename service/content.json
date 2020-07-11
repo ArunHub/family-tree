@@ -640,7 +640,7 @@
   "fname": "Sudakar ",
   "lname": "marikani",
   "gender": "M",
-  "spouse": "",
+  "spouse": "Rajalakshmi",
   "children": [
     "Mithra",
     "Bhuvan"
@@ -1284,7 +1284,7 @@
   "gender": "M",
   "spouse": "thulasi",
   "children": [
-    "sooriya",
+    "suryah",
     "punita"
   ],
   "father": "kasi nadar",
@@ -1301,7 +1301,7 @@
   "gender": "F",
   "spouse": "thangamani",
   "children": [
-    "sooriya",
+    "suryah",
     "punita"
   ],
   "father": "",
@@ -1327,7 +1327,7 @@
   "_id": {
     "$oid": "5f07f9607f48271778becedb"
   },
-  "fname": "sooriya",
+  "fname": "suryah",
   "lname": "",
   "gender": "M",
   "spouse": "",
