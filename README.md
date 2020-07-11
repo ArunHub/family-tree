@@ -25,7 +25,7 @@ After achieving the generic purpose of ,
 
 final usage and link for testing will be provided.
 
-#### Learn from this site:
+#### Learnt from this site:
 
 - Initially i chose SVG over canvas is to learn recent technology
 - While developing ES6 code and testing in chrome, i came to chrome started to support ES6,7 without any polyfills.
@@ -38,9 +38,9 @@ final usage and link for testing will be provided.
 - how to reuse the code in DOM 
 - Recursion
 
-- Started with variable width size and ended up with faulty SVG drawings. 
+- Started with variable width size and ended up with faulty SVG path lines. 
 - Again started with fresh thoughts to design with fixed width and drawn with single svg using a pattern found.
-- Achieving the pattern with some formulas was helpful in designing the tree perfectly.
+- Achieving the pattern with some formulas was helpful in designing the tree perfectly (attached paper images).
 - Rewrote the most of the logic more than 3 times with resusability in mind.
 - Focusing on building the tree with many combinations by leaving misc features like person picture and cosmetics changes.
 - Fortunately, ForeignObject element in SVG came to resue for DOM structure. Initially i thought ForeignObject is bad practice.
@@ -52,6 +52,6 @@ final usage and link for testing will be provided.
 - I can able to host web services and static files in same server itself
 
 **Update 7/9/20**
-- Hosted nodejs Express app as backend api service in AWS
+- Hosted nodejs Express app as backend api service in AWS and learnt CORS also to connect, allow single origin
 - Connected with mongodb
 - hosted my files frontend files in imarun.com
