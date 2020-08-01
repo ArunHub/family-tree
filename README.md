@@ -40,6 +40,7 @@ Download or clone the setup, then open command prompt in the folder and type
 - Domain like imarun.com is hosted in Apache server and i cannot host in node js server since Web host provider didnt provide access.
 - I can host nodejs app in AWS / Heroku
 - I can able to host web services and static files in same server itself
+- Looks like this project with Linked list data structure unknowingly since every child node depends on parent node
 
 **Update 7/9/20**
 - Hosted nodejs Express app as backend api service in AWS and learnt CORS also to connect, allow single origin
