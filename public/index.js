@@ -207,15 +207,26 @@ let newJson;
 
 window.onload = function () {
     const loaderEl = document.getElementById('loader');
+    const LOCALPATH = document.location.hostname === "localhost" ? './../service/content.json' : './service/content.json'
 
     // fetch('http://localhost:3000/data').then(t => { // setup for local development
-    fetch('http://52.66.178.232:4000/data').then(t => {
+    fetch('http://52.66.178.232:4000/data').then(t => { // stopped instance
         return t.json();
     }).then(f => {
         loaderEl.style.display = "none";
         newJson = new Tree(f);
         newJson.setChildCount();
         getDomTree("iyyam perumal", treeStructureId);
+    }).catch((error) => {
+      console.error('Error in Aws so fallback to local', error);
+      fetch(LOCALPATH).then(res=> {
+          return res.json();
+        }).then(q => {
+            loaderEl.style.display = "none";
+            newJson = new Tree(q);
+            newJson.setChildCount();
+            getDomTree("iyyam perumal", treeStructureId);
+        })
     });
 }
 
